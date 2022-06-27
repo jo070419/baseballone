@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_25_132208) do
+ActiveRecord::Schema.define(version: 2022_06_27_045343) do
+
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "category_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "recruitments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "level_id", null: false
+    t.integer "capacity_id", null: false
+    t.integer "prefecture_id", null: false
+    t.string "ball_park", null: false
+    t.date "event_date", null: false
+    t.string "start_time_id", null: false
+    t.string "end_time_id", null: false
+    t.date "recruitment_deadline", null: false
+    t.text "recruitment_text", null: false
+    t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_recruitments_on_category_id"
+    t.index ["user_id"], name: "index_recruitments_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "nickname", null: false
@@ -40,4 +65,6 @@ ActiveRecord::Schema.define(version: 2022_06_25_132208) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "recruitments", "categories"
+  add_foreign_key "recruitments", "users"
 end
