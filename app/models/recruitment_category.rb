@@ -5,7 +5,7 @@ class RecruitmentCategory
 
   with_options presence: true do
     validates :title,               length: {maximum: 100}
-    validates :category_name,       inclusion: {in: [1.2] }
+    validates :category_name,       inclusion: {in: ["対戦相手","助っ人"] }
     validates :level_id,            numericality: {other_than: 0, message: "can't be blank"}
     validates :capacity_id,         numericality: {other_than: 0, message: "can't be blank"}
     validates :prefecture_id,       numericality: {other_than: 0, message: "can't be blank"}
