@@ -5,7 +5,6 @@ class RecruitmentsController < ApplicationController
   end
 
   def create
-    binding.pry
     @recruitment_category = RecruitmentCategory.new(recruitment_params)
     if @recruitment_category.valid?
       @recruitment_category.save
