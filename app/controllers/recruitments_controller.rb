@@ -1,11 +1,14 @@
 class RecruitmentsController < ApplicationController
 
+  def index
+    @recruitments = Recruitment.all
+  end
+
   def new
     @recruitment_category = RecruitmentCategory.new
   end
 
   def create
-    binding.pry
     @recruitment_category = RecruitmentCategory.new(recruitment_params)
     if @recruitment_category.valid?
       @recruitment_category.save
