@@ -1,5 +1,9 @@
 class RecruitmentsController < ApplicationController
 
+  def index
+    @recruitments = Recruitment.all
+  end
+
   def new
     @recruitment_category = RecruitmentCategory.new
   end

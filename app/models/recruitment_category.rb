@@ -16,7 +16,6 @@ class RecruitmentCategory
     validates :recruitment_deadline
     validates :recruitment_text,    length: {maximum: 1000}
     validates :user_id
-    
   end
   validate :date_before_start
   validate :date_before_finish
