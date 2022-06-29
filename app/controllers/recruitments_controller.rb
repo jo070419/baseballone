@@ -21,6 +21,11 @@ class RecruitmentsController < ApplicationController
     @recruitment = Recruitment.find(params[:id])
   end
 
+  def destroy
+    recruitment = Recruitment.find(params[:id])
+    recruitment.destroy
+  end
+
   private
   def recruitment_params
     params.require(:recruitment_category).permit(:title, :category_name, :level_id, :capacity_id, :prefecture_id, :ball_park, :event_date, :start_time_id, :end_time_id, :recruitment_deadline, :recruitment_text).merge(user_id: current_user.id)

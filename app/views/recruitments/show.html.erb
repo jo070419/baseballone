@@ -35,7 +35,7 @@
 </div>
 <% if current_user == @recruitment.user %>
   <%= link_to "編集", "#" %>
-  <%= link_to "削除", "#" %>
+  <%= link_to "削除", recruitment_path(@recruitment.id), method: :delete %>
 <% else user_signed_in? %>
   <%= link_to "応募メッセージを送る", "#" %>
 <% end %>
