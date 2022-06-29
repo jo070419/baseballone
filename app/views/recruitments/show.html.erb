@@ -1,0 +1,44 @@
+<div>
+  タイトル
+  <%= @recruitment.title %>
+</div>
+<div>
+  募集カテゴリ
+  <%= @recruitment.category.category_name %>
+</div>
+<div>
+  レベル
+  <%= @recruitment.level.name %>
+</div>
+<div>
+  開催エリア
+  <%= @recruitment.prefecture.name %>
+</div>
+<div>
+  球場
+  <%= @recruitment.ball_park %>
+</div>
+<div>
+  開催日
+  <%= @recruitment.event_date %>
+  <%= @recruitment.start_time.name %>
+      -
+  <%= @recruitment.end_time.name %>
+</div>
+<div>
+  募集期限
+  <%= @recruitment.recruitment_deadline %>
+</div>
+<div>
+  本文
+  <%= @recruitment.recruitment_text %>
+</div>
+<% if current_user == @recruitment.user %>
+  <%= link_to "編集", "#" %>
+  <%= link_to "削除", "#" %>
+<% elsif user_signed_in? %>
+  <%= link_to "応募メッセージを送る", "#" %>
+<% else %>
+<% end %>
+  <%= link_to 'トップへ戻る', root_path %>
+</div>
