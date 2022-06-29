@@ -36,9 +36,8 @@
 <% if current_user == @recruitment.user %>
   <%= link_to "編集", "#" %>
   <%= link_to "削除", "#" %>
-<% elsif user_signed_in? %>
+<% else user_signed_in? %>
   <%= link_to "応募メッセージを送る", "#" %>
-<% else %>
 <% end %>
   <%= link_to 'トップへ戻る', root_path %>
 </div>
