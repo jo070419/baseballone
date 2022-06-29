@@ -5,7 +5,7 @@
   募集一覧
 </div>
 <% @recruitments.each do |recruitment| %>
-  <%= link_to "#" do %>
+  <%= link_to recruitment_path(recruitment.id) do %>
     <div>
       <%= recruitment.title %>
     </div>
@@ -24,6 +24,10 @@
       <%= recruitment.prefecture.name %>
       >
       <%= recruitment.ball_park %>
+    </div>
+    <div>
+      募集の種類：
+      <%= recruitment.category.category_name %>
     </div>
     <div>
       レベル：
