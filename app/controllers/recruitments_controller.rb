@@ -27,6 +27,27 @@ class RecruitmentsController < ApplicationController
       render "destroy", notice: '削除できませんでした'
     end
   end
+  
+  def edit
+    @recruitment = Recruitment.find(params[:id])
+    recruitment_attributes = @recruitment.attributes
+    @recruitment_category = RecruitmentCategory.new(recruitment_attributes)
+    @recruitment_category.category_name = @recruitment.category&.category_name
+  end
+
+  def update
+    binding.pry
+    @recruitment = Recruitment.find(params[:id])
+    @recruitment_category = RecruitmentCategory.new(recruitment_params)
+
+    @recruitment_category.category_name ||=@recruitment.category.category_name
+
+    if @recruitment_category.valid?
+      @recruitment_category.update(recruitment_params, @recruitment)
+    else
+      render :edit
+    end
+  end
 
   private
   def recruitment_params

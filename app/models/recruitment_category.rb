@@ -1,7 +1,10 @@
 class RecruitmentCategory
 
   include ActiveModel::Model
-  attr_accessor :title, :level_id, :capacity_id, :prefecture_id, :ball_park, :event_date, :start_time_id, :end_time_id, :recruitment_deadline, :recruitment_text, :user_id, :category_id, :category_name
+  attr_accessor(
+    :title, :level_id, :capacity_id, :prefecture_id, :ball_park, :event_date, :start_time_id, :end_time_id, :recruitment_deadline, :recruitment_text, :user_id, :category_id, :category_name,
+    :id, :created_at, :datetime, :updated_at, :datetime
+  )
 
   with_options presence: true do
     validates :title,               length: {maximum: 100}
@@ -33,5 +36,12 @@ class RecruitmentCategory
   def save
     category = Category.create(category_name: category_name)
     Recruitment.create(title: title, level_id: level_id, capacity_id: capacity_id, prefecture_id: prefecture_id, ball_park: ball_park, event_date: event_date, start_time_id: start_time_id, end_time_id: end_time_id, recruitment_deadline: recruitment_deadline, recruitment_text: recruitment_text, user_id: user_id, category_id: category.id)
+  end
+
+  def update(params, recruitment)
+    category_name = params.delete(:category_name)
+    category = Category.where(category_name: category_name).first_or_initialize if category_name.present?
+    category.save
+    recruitment.update(params)
   end
 end
