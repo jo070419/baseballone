@@ -23,7 +23,9 @@ class RecruitmentsController < ApplicationController
 
   def destroy
     recruitment = Recruitment.find(params[:id])
-    recruitment.destroy
+    unless recruitment.destroy
+      render "destroy", notice: '削除できませんでした'
+    end
   end
 
   private
