@@ -36,11 +36,10 @@ class RecruitmentsController < ApplicationController
   end
 
   def update
-    binding.pry
     @recruitment = Recruitment.find(params[:id])
     @recruitment_category = RecruitmentCategory.new(recruitment_params)
 
-    @recruitment_category.category_name ||=@recruitment.category.category_name
+    @recruitment_category.category_name || = @recruitment.category.category_name
 
     if @recruitment_category.valid?
       @recruitment_category.update(recruitment_params, @recruitment)
