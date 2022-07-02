@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
   has_many :recruitments
+  has_many :applies
 end
 

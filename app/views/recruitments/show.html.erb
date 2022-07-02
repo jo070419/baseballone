@@ -37,7 +37,7 @@
   <%= link_to "編集", edit_recruitment_path(@recruitment.id) %>
   <%= link_to "削除", recruitment_path(@recruitment.id), method: :delete %>
 <% else user_signed_in? %>
-  <%= link_to "応募メッセージを送る", "#" %>
+  <%= link_to "応募メッセージを送る", new_recruitment_apply_path(@recruitment.id) %>
 <% end %>
   <%= link_to 'トップへ戻る', root_path %>
 </div>
