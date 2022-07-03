@@ -3,6 +3,12 @@
   <%= @recruitment.title %>
 </div>
 <div>
+  <%# 募集者追加、（マージ時コメントアウト消す） %>
+  募集者
+  <%= link_to user_path(@recruitment.user.id) do %>
+    <%= @recruitment.user.nickname %>
+  <% end %>
+<div>
   募集カテゴリ
   <%= @recruitment.category.category_name %>
 </div>
