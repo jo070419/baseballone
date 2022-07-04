@@ -1,4 +1,5 @@
 class RecruitmentsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
 
   def index
     @recruitments = Recruitment.all

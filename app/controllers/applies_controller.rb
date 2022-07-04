@@ -1,4 +1,6 @@
 class AppliesController < ApplicationController
+  before_action :authenticate_user!, only:[:index, :new]
+
   def new
     @recruitment = Recruitment.find(params[:recruitment_id])
     @apply = Apply.new
@@ -9,6 +11,10 @@ class AppliesController < ApplicationController
     unless @apply.save
       render :new, notice: '応募に失敗しました'
     end
+  end
+
+  def index
+    @applies = Apply.where(user_id: current_user.id)
   end
 
   private

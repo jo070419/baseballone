@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :recruitments, except: [:index] do
     resources :applies, only: [:new, :create]
   end
+  resources :applies, only: [:index]
   resources :users, only: [:show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
