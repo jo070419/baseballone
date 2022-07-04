@@ -1,16 +1,10 @@
 応募一覧ページ
 <% @applies.each do |apply| %>
   <div>
-    <%# 応募詳細表示機能でリンク実装 %>
-    <%= link_to apply_path(apply.id) do %>
-      <%= apply.recruitment.title %>
-    <% end %>
-    <%# 応募詳細表示機能でリンク実装 %>
+    <%= link_to apply.recruitment.title, apply_path(apply.id) %>
   </div>
   <div>
-    <%= link_to user_path(apply.recruitment.user.id) do %>
-      <%= apply.recruitment.user.nickname %>
-    <% end %>
+    <%= link_to apply.recruitment.user.nickname, user_path(apply.recruitment.user.id) %>
   </div>
   <div>
     開催日時：

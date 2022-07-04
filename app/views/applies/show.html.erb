@@ -3,9 +3,7 @@
   <%= @apply.recruitment.title %>
 </div>
 <div>
-  <%= link_to user_path(@apply.recruitment.user.id) do %>
-    <%= @apply.recruitment.user.nickname %>
-  <% end %>
+  <%= link_to @apply.recruitment.user.nickname, user_path(@apply.recruitment.user.id) %>
 </div>
 <div>
   開催日時：
