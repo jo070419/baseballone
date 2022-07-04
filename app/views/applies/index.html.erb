@@ -2,7 +2,7 @@
 <% @applies.each do |apply| %>
   <div>
     <%# 応募詳細表示機能でリンク実装 %>
-    <%= link_to "#" do %>
+    <%= link_to apply_path(apply.id) do %>
       <%= apply.recruitment.title %>
     <% end %>
     <%# 応募詳細表示機能でリンク実装 %>
