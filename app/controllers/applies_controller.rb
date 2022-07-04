@@ -1,5 +1,5 @@
 class AppliesController < ApplicationController
-  before_action :authenticate_user!, only:[:index]
+  before_action :authenticate_user!, only:[:index, :new]
 
   def new
     @recruitment = Recruitment.find(params[:recruitment_id])
