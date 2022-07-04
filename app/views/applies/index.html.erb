@@ -1,0 +1,36 @@
+応募一覧ページ
+<% @applies.each do |apply| %>
+  <div>
+    <%# 応募詳細表示機能でリンク実装 %>
+    <%= link_to "#" do %>
+      <%= apply.recruitment.title %>
+    <% end %>
+    <%# 応募詳細表示機能でリンク実装 %>
+  </div>
+  <div>
+    <%= link_to user_path(apply.recruitment.user.id) do %>
+      <%= apply.recruitment.user.nickname %>
+    <% end %>
+  </div>
+  <div>
+    開催日時：
+    <%= apply.recruitment.event_date %>
+    <%= apply.recruitment.start_time.name %>
+    -
+    <%= apply.recruitment.end_time.name %>
+  </div>
+  <div>
+    場所：
+    <%= apply.recruitment.prefecture.name %>
+    >
+    <%= apply.recruitment.ball_park %>
+  </div>
+  <div>
+    募集の種類：
+    <%= apply.recruitment.category.category_name %>
+  </div>
+  <div>
+    レベル：
+    <%= apply.recruitment.level.name %>
+  </div>
+<% end %>

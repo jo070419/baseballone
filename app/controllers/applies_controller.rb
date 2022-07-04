@@ -11,6 +11,10 @@ class AppliesController < ApplicationController
     end
   end
 
+  def index
+    @applies = Apply.where(user_id: current_user.id)
+  end
+
   private
   def apply_params
     params.permit(:recruitment_id).merge(user_id: current_user.id)
