@@ -1,0 +1,2 @@
+module RecruitmentManagementsHelper
+end

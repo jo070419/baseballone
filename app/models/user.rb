@@ -6,5 +6,6 @@ class User < ApplicationRecord
          
   has_many :recruitments
   has_many :applies
+  has_many :agreements
 end
 

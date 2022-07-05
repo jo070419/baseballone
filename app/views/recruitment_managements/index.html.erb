@@ -1,0 +1,34 @@
+募集管理ページ
+<% @recruitments.zip(@applies) do |recruitment, apply| %>
+  <div>
+    <%= link_to recruitment_path(recruitment.id) do %>
+      <%= recruitment.title %>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to user_path(recruitment.user.id) do %>
+      <%= recruitment.user.nickname %>
+    <% end %>
+  </div>
+  <div>
+    開催日時：
+    <%= recruitment.event_date %>
+    <%= recruitment.start_time.name %>
+    -
+    <%= recruitment.end_time.name %>
+  </div>
+  <div>
+    場所：
+    <%= recruitment.prefecture.name %>
+    >
+    <%= recruitment.ball_park %>
+  </div>
+  <div>
+    募集の種類：
+    <%= recruitment.category.category_name %>
+  </div>
+  <div>
+    レベル：
+    <%= recruitment.level.name %>
+  </div>
+<% end %>
