@@ -1,5 +1,5 @@
 募集管理ページ
-<% @recruitments.zip(@applies) do |recruitment, apply| %>
+<% @recruitments.each do |recruitment| %>
   <div>
     <%= link_to recruitment_path(recruitment.id) do %>
       <%= recruitment.title %>
@@ -31,4 +31,20 @@
     レベル：
     <%= recruitment.level.name %>
   </div>
+  <% applies = Apply.where(recruitment_id: recruitment.id) %>
+  <% applies.each do |apply| %>
+    <div>
+      <%= link_to new_apply_agreement_path(apply.id) do %>
+        <div>
+          <%= apply.user.nickname %>
+        </div>
+        <div>
+          <%# メッセージ機能で実装 %>
+          <%= "送信者：" %>
+          <%= "メッセージメッセージメッセージ" %>
+          <%# メッセージ機能で実装 %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>

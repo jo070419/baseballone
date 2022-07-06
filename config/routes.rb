@@ -5,8 +5,16 @@ Rails.application.routes.draw do
   resources :recruitments, except: [:index] do
     resources :applies, only: [:new, :create]
   end
-  resources :applies, only: [:index, :show]
+  resources :applies, only: [:index, :show] do
+    resources :agreements, only: [:new] do
+      collection do
+        post 'yes'
+        post 'refusal'
+      end
+    end
+  end
   resources :users, only: [:show]
   resources :recruitment_managements, only: [:index]
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
