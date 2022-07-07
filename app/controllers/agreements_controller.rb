@@ -5,10 +5,9 @@ class AgreementsController < ApplicationController
   end
 
   def yes
-    binding.pry
     apply = Apply.find(params[:apply_id])
     agreement = Agreement.new(yes_params(apply))
-    unless agreement.save!
+    unless agreement.save
       render :new, notice: '合意できませんでした'
     end
   end
