@@ -36,8 +36,6 @@
     <%= link_to "合意する", yes_apply_agreements_path(@apply.id), method: :post %>
   </div>
   <div>
-    <%# お断り機能で実装 %>
-    <%= link_to "お断りする", "#" %>
-    <%# お断り機能で実装 %>
+    <%= link_to "お断りする", refusal_apply_agreements_path(@apply.id), method: :post %>
   </div>
 <% end %>
