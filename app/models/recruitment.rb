@@ -3,6 +3,7 @@ class Recruitment < ApplicationRecord
   belongs_to :user
   belongs_to :category
   has_many   :applies
+  has_many   :agreements
   belongs_to :capacity
   belongs_to :end_time
   belongs_to :level

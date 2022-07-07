@@ -17,7 +17,7 @@
 </div>
 <% if @user == current_user %>
   <div>
-    募集管理
+    <%= link_to "募集管理", recruitment_managements_path %>
   </div>
   <div>
     <%= link_to "応募管理", applies_path %>

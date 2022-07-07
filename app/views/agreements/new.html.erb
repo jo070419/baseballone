@@ -1,0 +1,43 @@
+<div>
+  <%= @recruitment.title %>
+</div>
+<div>
+  <%= link_to user_path(@recruitment.user.id) do %>
+    <%= @recruitment.user.nickname %>
+  <% end %>
+</div>
+<div>
+  開催日時：
+  <%= @recruitment.event_date %>
+  <%= @recruitment.start_time.name %>
+  -
+  <%= @recruitment.end_time.name %>
+</div>
+<div>
+  場所：
+  <%= @recruitment.prefecture.name %>
+  >
+  <%= @recruitment.ball_park %>
+</div>
+<div>
+  募集の種類：
+  <%= @recruitment.category.category_name %>
+</div>
+<div>
+  レベル：
+  <%= @recruitment.level.name %>
+</div>
+<div>
+  応募者：
+  <%= @apply.user.nickname %>
+</div>
+<% unless @recruitment.agreements.present? && @apply.user.agreements.present? %>
+  <div>
+    <%= link_to "合意する", yes_apply_agreements_path(@apply.id), method: :post %>
+  </div>
+  <div>
+    <%# お断り機能で実装 %>
+    <%= link_to "お断りする", "#" %>
+    <%# お断り機能で実装 %>
+  </div>
+<% end %>

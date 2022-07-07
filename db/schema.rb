@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_01_002548) do
+ActiveRecord::Schema.define(version: 2022_07_04_235022) do
+
+  create_table "agreements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.boolean "agreement_flag"
+    t.bigint "user_id"
+    t.bigint "recruitment_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recruitment_id"], name: "index_agreements_on_recruitment_id"
+    t.index ["user_id"], name: "index_agreements_on_user_id"
+  end
 
   create_table "applies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
