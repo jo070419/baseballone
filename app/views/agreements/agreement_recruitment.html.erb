@@ -1,0 +1,50 @@
+合意した応募
+<% @agreements.each do |agreement| %>
+  <div>
+    <%= link_to recruitment_path(agreement.recruitment.id) do %>
+      <%= agreement.recruitment.title %>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to user_path(agreement.recruitment.user.id) do %>
+      <%= agreement.recruitment.user.nickname %>
+    <% end %>
+  </div>
+  <div>
+    開催日時：
+    <%= agreement.recruitment.event_date %>
+    <%= agreement.recruitment.start_time.name %>
+    -
+    <%= agreement.recruitment.end_time.name %>
+  </div>
+  <div>
+    場所：
+    <%= agreement.recruitment.prefecture.name %>
+    >
+    <%= agreement.recruitment.ball_park %>
+  </div>
+  <div>
+    募集の種類：
+    <%= agreement.recruitment.category.category_name %>
+  </div>
+  <div>
+    レベル：
+    <%= agreement.recruitment.level.name %>
+  </div>
+  <% applies = Apply.where(recruitment_id: agreement.recruitment.id) %>
+  <% applies.each do |apply| %>
+    <div>
+      <%= link_to new_apply_agreement_path(apply.id) do %>
+        <div>
+          <%= apply.user.nickname %>
+        </div>
+        <div>
+          <%# メッセージ機能で実装 %>
+          <%= "送信者：" %>
+          <%= "メッセージメッセージメッセージ" %>
+          <%# メッセージ機能で実装 %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
