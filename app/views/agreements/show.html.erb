@@ -1,0 +1,44 @@
+合意後詳細ページ
+<div>
+  <%= @agreement.recruitment.title %>
+</div>
+<div>
+  <%= link_to user_path(@agreement.recruitment.user.id) do %>
+    <%= @agreement.recruitment.user.nickname %>
+  <% end %>
+</div>
+<div>
+  開催日時：
+  <%= @agreement.recruitment.event_date %>
+  <%= @agreement.recruitment.start_time.name %>
+  -
+  <%= @agreement.recruitment.end_time.name %>
+</div>
+<div>
+  場所：
+  <%= @agreement.recruitment.prefecture.name %>
+  >
+  <%= @agreement.recruitment.ball_park %>
+</div>
+<div>
+  募集の種類：
+  <%= @agreement.recruitment.category.category_name %>
+</div>
+<div>
+  レベル：
+  <%= @agreement.recruitment.level.name %>
+</div>
+<%# メッセージ機能で実装 %>
+  <%# メッセージ入力欄 %>
+    <%= link_to "送信する", "#" %>
+  <%# メッセージ入力欄 %>
+  <%# メッセージ表示欄 %>
+    <%# 〜 %>
+  <%# メッセージ表示欄 %>
+<%# メッセージ機能で実装 %>
+<div>
+  <%= link_to "評価する", "#" %>
+</div>
+<div>
+  <%= link_to "合意をキャンセルする", "#" %>
+</div>

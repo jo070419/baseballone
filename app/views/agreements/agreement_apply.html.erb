@@ -1,4 +1,4 @@
-合意した募集
+合意した応募
 <% @applies.each do |apply| %>
   <% recruitment = Recruitment.find(apply.recruitment.id) %>
   <% agreement = Agreement.find_by(recruitment_id: recruitment.id, agreement_flag: 1) %>
@@ -32,5 +32,18 @@
     <div>
       レベル：
       <%= apply.recruitment.level.name %>
+    </div>
+    <div>
+      <%# メッセージ機能で実装 %>
+      <% agreement = Agreement.find_by(recruitment_id: apply.recruitment.id) %>
+      <%= link_to agreement_path(agreement.id) do %>
+        <div>
+          <%= "送信者：" %>
+        </div>
+        <div>
+          <%= "メッセージメッセージメッセージ" %>
+        </div>
+      <% end %>
+      <%# メッセージ機能で実装 %>
     </div>
 <% end %>

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:show]
   resources :recruitment_managements, only: [:index]
-  resources :agreements, except: [:index, :new, :create, :show, :destroy, :edit, :update] do
+  resources :agreements, except: [:index, :new, :create, :destroy, :edit, :update] do
     collection do
       get 'agreement_recruitment'
       get 'agreement_apply'
