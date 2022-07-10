@@ -15,6 +15,12 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:show]
   resources :recruitment_managements, only: [:index]
+  resources :agreements, except: [:index, :new, :create, :show, :destroy, :edit, :update] do
+    collection do
+      get 'agreement_recruitment'
+      get 'agreement_apply'
+    end
+  end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

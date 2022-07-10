@@ -1,4 +1,6 @@
 class AgreementsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @apply = Apply.find(params[:apply_id])
     @recruitment = Recruitment.find(@apply.recruitment.id)
@@ -18,6 +20,15 @@ class AgreementsController < ApplicationController
     unless agreement.save
       render :new, notice: 'お断りが完了できませんでした'
     end
+  end
+
+  def agreement_recruitment
+    recruitments = Recruitment.where(user_id: current_user.id)
+    @agreements = Agreement.where(recruitment_id: recruitments.ids, agreement_flag: 1)
+  end
+
+  def agreement_apply
+    @applies = Apply.where(user_id: current_user.id)
   end
 
   private
