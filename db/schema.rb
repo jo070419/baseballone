@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2022_07_04_235022) do
 
   create_table "agreements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.boolean "agreement_flag"
+    t.boolean "cancel_flag", default: false
     t.bigint "user_id"
     t.bigint "recruitment_id"
     t.datetime "created_at", precision: 6, null: false

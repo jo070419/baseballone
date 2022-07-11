@@ -1,4 +1,4 @@
-合意後詳細ページ
+合意後キャンセルページ
 <div>
   <%= @agreement.recruitment.title %>
 </div>
@@ -28,21 +28,23 @@
   レベル：
   <%= @agreement.recruitment.level.name %>
 </div>
+<div>
+  応募者：
+  <%= @agreement.user.nickname %>
+<div>
+  キャンセルしますか？
+</div>
+<div>
+  ※開催までの時間によってペナルティポイントが付与されます
+</div>
+<div>
+  <%= link_to "ペナルティポイントについてはこちら", "#" %>
+</div>
 <% if @agreement.cancel_flag == false %>
-  <%# メッセージ機能で実装 %>
-    <%# メッセージ入力欄 %>
-      <%= link_to "送信する", "#" %>
-    <%# メッセージ入力欄 %>
-    <%# メッセージ表示欄 %>
-      <%# 〜 %>
-    <%# メッセージ表示欄 %>
-  <%# メッセージ機能で実装 %>
   <div>
-    <%= link_to "評価する", "#" %>
+    <%= link_to "キャンセルする", cancel_complete_agreement_path(@agreement.id) %>
   </div>
-  <div>
-    <%= link_to "合意をキャンセルする", cancel_confirmation_agreement_path(@agreement.id) %>
-  </div>
-<% else %>
-  この合意はキャンセルされました
 <% end %>
+<div>
+  <%= link_to "戻る", agreement_path(@agreement.id) %>
+</div>

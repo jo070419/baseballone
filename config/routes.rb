@@ -20,6 +20,10 @@ Rails.application.routes.draw do
       get 'agreement_recruitment'
       get 'agreement_apply'
     end
+    member do
+      get 'cancel_confirmation'
+      get 'cancel_complete'
+    end
   end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
