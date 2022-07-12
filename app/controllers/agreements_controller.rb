@@ -41,7 +41,7 @@ class AgreementsController < ApplicationController
 
   def cancel_complete
     @agreement = Agreement.find(params[:id])
-    @agreement.cancel_flag = 1
+    @agreement.cancel_flag = true
     @agreement.save
   end
 
