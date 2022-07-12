@@ -7,4 +7,5 @@ class Agreement < ApplicationRecord
     validates :recruitment_id
   end
   validates :agreement_flag, inclusion: {in: [true, false]}
+  validates :cancel_flag, inclusion: {in: [true, false]}
 end

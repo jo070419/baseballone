@@ -35,6 +35,16 @@ class AgreementsController < ApplicationController
     @agreement = Agreement.find(params[:id])
   end
 
+  def cancel_confirmation
+    @agreement = Agreement.find(params[:id])
+  end
+
+  def cancel_complete
+    @agreement = Agreement.find(params[:id])
+    @agreement.cancel_flag = true
+    @agreement.save
+  end
+
   private
   def yes_params(apply)
     params.permit().merge(agreement_flag: 1, user_id: apply.user.id, recruitment_id: apply.recruitment.id)
