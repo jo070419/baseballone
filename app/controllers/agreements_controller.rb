@@ -4,6 +4,9 @@ class AgreementsController < ApplicationController
   def new
     @apply = Apply.find(params[:apply_id])
     @recruitment = Recruitment.find(@apply.recruitment.id)
+    message_rooms = MessageRoom.where(recruitment_id: @apply.recruitment.id)
+    @messages = Message.where(user_id: current_user.id).or(Message.where(user_id: @apply.user.id)).where(message_room_id: message_rooms.ids)
+    @message = Message.new
   end
 
   def yes
@@ -23,8 +26,9 @@ class AgreementsController < ApplicationController
   end
 
   def agreement_recruitment
-    recruitments = Recruitment.where(user_id: current_user.id)
-    @agreements = Agreement.where(recruitment_id: recruitments.ids, agreement_flag: 1)
+    @recruitments = Recruitment.where(user_id: current_user.id)
+    # agreements = Agreement.where(recruitment_id: recruitments.ids, agreement_flag: 1).limit(999).take
+    # recruitments = Recruitment.where(id: agreements.recruitment.id)
   end
 
   def agreement_apply

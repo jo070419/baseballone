@@ -3,12 +3,15 @@ class AppliesController < ApplicationController
 
   def new
     @recruitment = Recruitment.find(params[:recruitment_id])
-    @apply = Apply.new
+    @apply_message = ApplyMessage.new
   end
   
   def create
-    @apply = Apply.new(apply_params)
-    unless @apply.save
+    @recruitment = Recruitment.find(params[:recruitment_id])
+    @apply_message = ApplyMessage.new(apply_params)
+    if @apply_message.valid?
+      @apply_message.save
+    else
       render :new, notice: '応募に失敗しました'
     end
   end
@@ -19,10 +22,13 @@ class AppliesController < ApplicationController
 
   def show
     @apply = Apply.find(params[:id])
+    message_rooms = MessageRoom.where(recruitment_id: @apply.recruitment.id)
+    @messages = Message.where(user_id: current_user.id).or(Message.where(user_id: @apply.recruitment.user.id)).where(message_room_id: message_rooms.ids)
+    @message = Message.new
   end
 
   private
   def apply_params
-    params.permit(:recruitment_id).merge(user_id: current_user.id)
+    params.require(:apply_message).permit(:text).merge(user_id: current_user.id, recruitment_id: params[:recruitment_id])
   end
 end

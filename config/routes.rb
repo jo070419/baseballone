@@ -12,6 +12,12 @@ Rails.application.routes.draw do
         post 'refusal'
       end
     end
+    resources :messages, except: [:index, :new, :create, :destroy, :edit, :update, :show] do
+      collection do
+        post 'apply_show_message'
+        post 'agreement_message'
+      end
+    end
   end
   resources :users, only: [:show]
   resources :recruitment_managements, only: [:index]

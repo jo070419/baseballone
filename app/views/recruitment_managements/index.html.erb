@@ -1,5 +1,6 @@
 募集管理ページ
 <% @recruitments.each do |recruitment| %>
+  <% agreement = Agreement.where(recruitment_id: recruitment.id, agreement_flag: 1) %>
   <div>
     <%= link_to recruitment_path(recruitment.id) do %>
       <%= recruitment.title %>
@@ -36,13 +37,18 @@
     <div>
       <%= link_to new_apply_agreement_path(apply.id) do %>
         <div>
+          応募者：
           <%= apply.user.nickname %>
         </div>
+          <% message_rooms = MessageRoom.where(recruitment_id: apply.recruitment.id) %>
+          <% message = Message.where(user_id: current_user.id).or(Message.where(user_id: apply.user.id)).where(message_room_id: message_rooms.ids).order(updated_at: :desc).limit(1).take %>
         <div>
-          <%# メッセージ機能で実装 %>
-          <%= "送信者：" %>
-          <%= "メッセージメッセージメッセージ" %>
-          <%# メッセージ機能で実装 %>
+          <% if message.user.id == current_user.id %>
+            あなた
+          <% else %>
+            <%= message.user.nickname %>
+          <% end %>
+          <%= message.text %>
         </div>
       <% end %>
     </div>

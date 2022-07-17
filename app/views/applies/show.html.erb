@@ -26,7 +26,20 @@
   レベル：
   <%= @apply.recruitment.level.name %>
 </div>
-<%# メッセージ機能実装時 %>
-  <%# 送信する %>
-<%# メッセージ機能実装時 %>
+<%= form_with model: @message, url: apply_show_message_apply_messages_path(@apply.id), local: true do |f| %>
+  <%= f.text_area :text, placeholder: "500字以内" %>
+  <%= f.submit "応募メッセージを送信する" %>
+<% end %>
+<% @messages.each do |message| %>
+  <div>
+    <% if message.user.id == current_user.id %>
+      あなた
+    <% else %>
+      <%= message.user.name %>
+    <% end %>
+  </div>
+  <div>
+    <%= message.text %>
+  </div>
+<% end %>
 <%= link_to "戻る", applies_path %>

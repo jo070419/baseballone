@@ -31,6 +31,22 @@
   応募者：
   <%= @apply.user.nickname %>
 </div>
+<%= form_with model: @message, url: agreement_message_apply_messages_path(@apply.id), local: true do |f| %>
+  <%= f.text_area :text, placeholder: "500字以内" %>
+  <%= f.submit "応募メッセージを送信する" %>
+<% end %>
+<% @messages.each do |message| %>
+  <div>
+    <% if message.user.id == current_user.id %>
+      あなた
+    <% else %>
+      <%= message.user.nickname %>
+    <% end %>
+  </div>
+  <div>
+    <%= message.text %>
+  </div>
+<% end %>
 <% unless @recruitment.agreements.present? && @apply.user.agreements.present? %>
   <div>
     <%= link_to "合意する", yes_apply_agreements_path(@apply.id), method: :post %>
