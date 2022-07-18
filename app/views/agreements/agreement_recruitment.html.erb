@@ -35,21 +35,21 @@
     </div>
     <% applies = Apply.where(recruitment_id: recruitment.id) %>
     <% applies.each do |apply| %>
-      <% agreement = Agreement.find_by(recruitment_id: apply.recruitment.id) %>
-      <%= link_to agreement_path(agreement.id) do %>
-        <div>
-          <%= apply.user.nickname %>
-        </div>
-        <div>
-          <%# メッセージ機能で実装 %>
+      <% agreement = Agreement.find_by(user_id: apply.user.id) %>
+      <% if agreement.present? %>
+        <%= link_to agreement_path(agreement.id) do %>
           <div>
-            <%= "送信者：" %>
+            <%= apply.user.nickname %>
           </div>
           <div>
-            <%= "メッセージメッセージメッセージ" %>
+            <div>
+              <%= "送信者：" %>
+            </div>
+            <div>
+              <%= "メッセージメッセージメッセージ" %>
+            </div>
           </div>
-          <%# メッセージ機能で実装 %>
-        </div>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

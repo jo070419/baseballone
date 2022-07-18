@@ -1,5 +1,5 @@
 class RecruitmentsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :show]
 
   def index
     @recruitments = Recruitment.all
@@ -20,6 +20,7 @@ class RecruitmentsController < ApplicationController
 
   def show
     @recruitment = Recruitment.find(params[:id])
+    @apply = Apply.find_by(recruitment_id: @recruitment.id, user_id: current_user.id)
   end
 
   def destroy

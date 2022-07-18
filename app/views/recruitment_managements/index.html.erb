@@ -32,6 +32,7 @@
     レベル：
     <%= recruitment.level.name %>
   </div>
+  <%# 募集に紐づく応募情報取得 %>
   <% applies = Apply.where(recruitment_id: recruitment.id) %>
   <% applies.each do |apply| %>
     <div>
@@ -40,7 +41,11 @@
           応募者：
           <%= apply.user.nickname %>
         </div>
+          <% binding.pry %>
+          <%# recruitment_idが募集に紐づくメッセージルームを取得 %>
           <% message_rooms = MessageRoom.where(recruitment_id: apply.recruitment.id) %>
+          <%# メッセージルームを特定 %>
+          <% entry = Entry.where(user_id: current_user.id, user_id: apply.user.id).where(message_room_id: message_rooms.ids) %>
           <% message = Message.where(user_id: current_user.id).or(Message.where(user_id: apply.user.id)).where(message_room_id: message_rooms.ids).order(updated_at: :desc).limit(1).take %>
         <div>
           <% if message.user.id == current_user.id %>

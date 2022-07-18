@@ -16,7 +16,7 @@ class ApplyMessage
     # entriesに応募者を保存
     Entry.create(user_id: user_id, message_room_id: message_room.id)
     # entriesに募集者を保存
-    Entry.create(user_id: apply.recruitment.id, message_room_id: message_room.id)
+    Entry.create!(user_id: apply.recruitment.user.id, message_room_id: message_room.id)
     # メッセージを保存
     Message.create(text: text, user_id: user_id, message_room_id: message_room.id)
   end
