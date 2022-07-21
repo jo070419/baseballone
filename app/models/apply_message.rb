@@ -1,6 +1,6 @@
 class ApplyMessage
   include ActiveModel::Model
-  attr_accessor :user_id, :recruitment_id, :message_room_id, :text
+  attr_accessor :user_id, :apply_id, :recruitment_id, :message_room_id, :text
 
   with_options presence: true do
     validates :user_id
@@ -12,7 +12,7 @@ class ApplyMessage
     # 応募情報保存
     apply = Apply.create(user_id: user_id, recruitment_id: recruitment_id)
     # message_room作成
-    message_room = MessageRoom.create(recruitment_id: recruitment_id)
+    message_room = MessageRoom.create(apply_id: apply.id)
     # entriesに応募者を保存
     Entry.create(user_id: user_id, message_room_id: message_room.id)
     # entriesに募集者を保存

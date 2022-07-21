@@ -42,10 +42,9 @@
           <%= apply.user.nickname %>
         </div>
           <%# recruitment_idが募集に紐づくメッセージルームを取得 %>
-          <% message_rooms = MessageRoom.where(recruitment_id: apply.recruitment.id) %>
+          <% message_room = MessageRoom.find_by(apply_id: apply.id) %>
           <%# メッセージルームを特定 %>
-          <% entries = Entry.where(user_id: current_user.id, user_id: apply.user.id).where(message_room_id: message_rooms.ids) %>
-          <% message = Message.where(user_id: current_user.id).or(Message.where(user_id: apply.user.id)).where(message_room_id: message_rooms.ids).order(updated_at: :desc).limit(1).take %>
+          <% message = Message.where(message_room_id: message_room.id).last %>
         <div>
           <% if message.user.id == current_user.id %>
             あなた

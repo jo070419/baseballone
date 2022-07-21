@@ -48,10 +48,10 @@ ActiveRecord::Schema.define(version: 2022_07_12_134359) do
   end
 
   create_table "message_rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "recruitment_id", null: false
+    t.bigint "apply_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["recruitment_id"], name: "index_message_rooms_on_recruitment_id"
+    t.index ["apply_id"], name: "index_message_rooms_on_apply_id"
   end
 
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 2022_07_12_134359) do
   add_foreign_key "applies", "users"
   add_foreign_key "entries", "message_rooms"
   add_foreign_key "entries", "users"
-  add_foreign_key "message_rooms", "recruitments"
+  add_foreign_key "message_rooms", "applies"
   add_foreign_key "messages", "message_rooms"
   add_foreign_key "messages", "users"
   add_foreign_key "recruitments", "categories"

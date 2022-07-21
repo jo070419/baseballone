@@ -4,8 +4,8 @@ class AgreementsController < ApplicationController
   def new
     @apply = Apply.find(params[:apply_id])
     @recruitment = Recruitment.find(@apply.recruitment.id)
-    message_rooms = MessageRoom.where(recruitment_id: @apply.recruitment.id)
-    @messages = Message.where(user_id: current_user.id).or(Message.where(user_id: @apply.user.id)).where(message_room_id: message_rooms.ids)
+    message_room = MessageRoom.find_by(apply_id: @apply.id)
+    @messages = Message.where(message_room_id: message_room.id)
     @message = Message.new
   end
 

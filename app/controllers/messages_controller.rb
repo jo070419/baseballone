@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   def apply_show_message
     apply = Apply.find(params[:apply_id])
-    message_room = MessageRoom.find_by(recruitment_id: apply.recruitment.id)
+    message_room = MessageRoom.find_by(apply_id: apply.id)
     if Message.create(message_params(message_room))
       redirect_to apply_path(apply.id)
     else
@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
 
   def agreement_message
     apply = Apply.find(params[:apply_id])
-    message_room = MessageRoom.find_by(recruitment_id: apply.recruitment.id)
+    message_room = MessageRoom.find_by(apply_id: apply.id)
     if Message.create(message_params(message_room))
       redirect_to new_apply_agreement_path(apply.id)
     else
