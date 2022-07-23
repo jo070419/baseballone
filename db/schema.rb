@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(version: 2022_07_12_134359) do
     t.boolean "cancel_flag", default: false
     t.bigint "user_id"
     t.bigint "recruitment_id"
+    t.bigint "apply_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["apply_id"], name: "index_agreements_on_apply_id"
     t.index ["recruitment_id"], name: "index_agreements_on_recruitment_id"
     t.index ["user_id"], name: "index_agreements_on_user_id"
   end

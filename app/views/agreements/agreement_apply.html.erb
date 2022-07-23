@@ -1,7 +1,7 @@
 合意した応募
 <% @applies.each do |apply| %>
   <% recruitment = Recruitment.find(apply.recruitment.id) %>
-  <% agreement = Agreement.find_by(recruitment_id: recruitment.id, agreement_flag: 1) %>
+  <% agreement = Agreement.find_by(apply_id: apply.id, agreement_flag: 1) %>
   <% if agreement.present? %>
     <div>
       <%= link_to recruitment_path(apply.recruitment.id) do %>
@@ -36,17 +36,17 @@
     </div>
     <div>
       <%# メッセージ機能で実装 %>
-      <% agreement = Agreement.find_by(recruitment_id: apply.recruitment.id) %>
-      <% if agreement.present? %>
+        <% message_room = MessageRoom.find_by(apply_id: apply.id) %>
+        <% message = Message.where(message_room_id: message_room.id).last %>
         <%= link_to agreement_path(agreement.id) do %>
           <div>
-            <%= "送信者：" %>
+            送信者：
+            <%= message.user.nickname %>
           </div>
           <div>
-            <%= "メッセージメッセージメッセージ" %>
+            <%= message.text %>
           </div>
         <% end %>
-      <% end %>
       <%# メッセージ機能で実装 %>
     </div>
   <% else %>

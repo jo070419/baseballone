@@ -5,6 +5,7 @@ class CreateAgreements < ActiveRecord::Migration[6.0]
       t.boolean    :cancel_flag, default: false
       t.references :user
       t.references :recruitment
+      t.references :apply
       t.timestamps
     end
   end

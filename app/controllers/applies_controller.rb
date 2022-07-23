@@ -23,7 +23,7 @@ class AppliesController < ApplicationController
   def show
     @apply = Apply.find(params[:id])
     message_room = MessageRoom.find_by(apply_id: @apply.id)
-    @messages = Message.where(message_room_id: message_room.id)
+    @messages = Message.where(message_room_id: message_room.id).order(id: "DESC")
     @message = Message.new
   end
 

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       collection do
         post 'apply_show_message'
         post 'agreement_message'
+        post 'after_agreement_message'
       end
     end
   end
