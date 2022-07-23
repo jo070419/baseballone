@@ -4,6 +4,9 @@ class AgreementsController < ApplicationController
   def new
     @apply = Apply.find(params[:apply_id])
     @recruitment = Recruitment.find(@apply.recruitment.id)
+    message_room = MessageRoom.find_by(apply_id: @apply.id)
+    @messages = Message.where(message_room_id: message_room.id).order(id: "DESC")
+    @message = Message.new
   end
 
   def yes
@@ -23,8 +26,7 @@ class AgreementsController < ApplicationController
   end
 
   def agreement_recruitment
-    recruitments = Recruitment.where(user_id: current_user.id)
-    @agreements = Agreement.where(recruitment_id: recruitments.ids, agreement_flag: 1)
+    @recruitments = Recruitment.where(user_id: current_user.id)
   end
 
   def agreement_apply
@@ -33,6 +35,9 @@ class AgreementsController < ApplicationController
 
   def show
     @agreement = Agreement.find(params[:id])
+    @message_room = MessageRoom.find_by(apply_id: @agreement.apply_id)
+    @messages = Message.where(message_room_id: @message_room.id).order(id: "DESC")
+    @message = Message.new
   end
 
   def cancel_confirmation
@@ -47,10 +52,10 @@ class AgreementsController < ApplicationController
 
   private
   def yes_params(apply)
-    params.permit().merge(agreement_flag: 1, user_id: apply.user.id, recruitment_id: apply.recruitment.id)
+    params.permit(:apply_id).merge(agreement_flag: 1, user_id: apply.user.id, recruitment_id: apply.recruitment.id)
   end
 
   def refusal_params(apply)
-    params.permit().merge(agreement_flag: 0, user_id: apply.user.id, recruitment_id: apply.recruitment.id)
+    params.permit(:apply_id).merge(agreement_flag: 0, user_id: apply.user.id, recruitment_id: apply.recruitment.id)
   end
 end

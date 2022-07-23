@@ -29,14 +29,22 @@
   <%= @agreement.recruitment.level.name %>
 </div>
 <% if @agreement.cancel_flag == false %>
-  <%# メッセージ機能で実装 %>
-    <%# メッセージ入力欄 %>
-      <%= link_to "送信する", "#" %>
-    <%# メッセージ入力欄 %>
-    <%# メッセージ表示欄 %>
-      <%# 〜 %>
-    <%# メッセージ表示欄 %>
-  <%# メッセージ機能で実装 %>
+  <%= form_with model: @message, url: after_agreement_message_apply_messages_path(@agreement.apply_id), local: true do |f| %>
+    <%= f.text_area :text, placeholder: "500字以内" %>
+    <%= f.submit "応募メッセージを送信する" %>
+  <% end %>
+  <% @messages.each do |message| %>
+    <div>
+      <% if message.user.id == current_user.id %>
+        あなた
+      <% else %>
+        <%= message.user.nickname %>
+      <% end %>
+    </div>
+    <div>
+      <%= message.text %>
+    </div>
+  <% end %>
   <div>
     <%= link_to "評価する", "#" %>
   </div>

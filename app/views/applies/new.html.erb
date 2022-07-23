@@ -1,4 +1,6 @@
 応募メッセージ
-<%# メッセージ機能は後ほど作成 %>
-<%= link_to '応募する', recruitment_applies_path(@recruitment.id), method: :post %>
+<%= form_with model: @apply_message, url: recruitment_applies_path(@recruitment.id), local: true do |f|%>
+  <%= f.text_area :text, placeholder: "500字以内" %>
+  <%= f.submit "応募メッセージを送信する" %>
+<% end %>
 <%= link_to '戻る', recruitment_path(@recruitment.id) %>

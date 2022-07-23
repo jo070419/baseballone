@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_04_235022) do
+ActiveRecord::Schema.define(version: 2022_07_12_134359) do
 
   create_table "agreements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.boolean "agreement_flag"
     t.boolean "cancel_flag", default: false
     t.bigint "user_id"
     t.bigint "recruitment_id"
+    t.bigint "apply_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["apply_id"], name: "index_agreements_on_apply_id"
     t.index ["recruitment_id"], name: "index_agreements_on_recruitment_id"
     t.index ["user_id"], name: "index_agreements_on_user_id"
   end
@@ -36,6 +38,32 @@ ActiveRecord::Schema.define(version: 2022_07_04_235022) do
     t.string "category_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "message_room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_room_id"], name: "index_entries_on_message_room_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
+  create_table "message_rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "apply_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["apply_id"], name: "index_message_rooms_on_apply_id"
+  end
+
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.text "text"
+    t.bigint "user_id", null: false
+    t.bigint "message_room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_room_id"], name: "index_messages_on_message_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "recruitments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -87,6 +115,11 @@ ActiveRecord::Schema.define(version: 2022_07_04_235022) do
 
   add_foreign_key "applies", "recruitments"
   add_foreign_key "applies", "users"
+  add_foreign_key "entries", "message_rooms"
+  add_foreign_key "entries", "users"
+  add_foreign_key "message_rooms", "applies"
+  add_foreign_key "messages", "message_rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "recruitments", "categories"
   add_foreign_key "recruitments", "users"
 end
