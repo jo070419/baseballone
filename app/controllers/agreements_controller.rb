@@ -48,6 +48,34 @@ class AgreementsController < ApplicationController
     @agreement = Agreement.find(params[:id])
     @agreement.cancel_flag = true
     @agreement.save
+    penalty_point = PenaltyPoint.find_by(user_id: current_user.id)
+    @penalty_point_log = PenaltyPointLog.new
+    # 現在の時刻（キャンセルした時の時刻）を入手
+    cancel_time = Time.now
+    # 募集のイベント開始日を入手
+    event_day = @agreement.recruitment.event_date
+    # 募集の開始時間を入手
+    event_time = @agreement.recruitment.start_time.name
+    # 文字列で入手した募集の開始時間をデータ化
+    event_time = Time.parse(event_time)
+    # イベント開始日、開始時間をマージ
+    event_date = Time.new(event_day.year, event_day.month, event_day.day, event_time.hour, event_time.min, event_time.sec)
+    # キャンセル時間とイベント開始時間を計算し、残り時間を算出（時で算出）
+    time_left = (event_date - cancel_time)/3600
+    # 残り時間に応じてペナルティポイント付与
+    if time_left > 48
+      penalty_point.point += 2
+      penalty_point.save
+      @penalty_point_log = PenaltyPointLog.create(increase_decrease_value: 2, penalty_point_id: penalty_point.id)
+    elsif time_left > 24
+      penalty_point.point += 5
+      penalty_point.save
+      @penalty_point_log = PenaltyPointLog.create(increase_decrease_value: 5, penalty_point_id: penalty_point.id)
+    else time_left < 24
+      penalty_point.point += 8
+      penalty_point.save
+      @penalty_point_log = PenaltyPointLog.create(increase_decrease_value: 8, penalty_point_id: penalty_point.id)
+    end
   end
 
   private
