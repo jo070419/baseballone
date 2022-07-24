@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_12_134359) do
+ActiveRecord::Schema.define(version: 2022_07_23_132835) do
 
   create_table "agreements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.boolean "agreement_flag"
@@ -64,6 +64,22 @@ ActiveRecord::Schema.define(version: 2022_07_12_134359) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["message_room_id"], name: "index_messages_on_message_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "penalty_point_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "increase_decrease_value"
+    t.bigint "penalty_point_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["penalty_point_id"], name: "index_penalty_point_logs_on_penalty_point_id"
+  end
+
+  create_table "penalty_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "point"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_penalty_points_on_user_id"
   end
 
   create_table "recruitments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -120,6 +136,8 @@ ActiveRecord::Schema.define(version: 2022_07_12_134359) do
   add_foreign_key "message_rooms", "applies"
   add_foreign_key "messages", "message_rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "penalty_point_logs", "penalty_points"
+  add_foreign_key "penalty_points", "users"
   add_foreign_key "recruitments", "categories"
   add_foreign_key "recruitments", "users"
 end
