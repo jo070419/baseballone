@@ -4,4 +4,7 @@ class PagesController < ApplicationController
 
   def show
   end
+
+  def penalty_point_explanation
+  end
 end
