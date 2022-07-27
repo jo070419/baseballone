@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
   root 'recruitments#index'
   get 'pages/show'
+  get 'pages/penalty_point_explanation'
   resources :recruitments, except: [:index] do
     resources :applies, only: [:new, :create]
   end

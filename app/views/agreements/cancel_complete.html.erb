@@ -2,7 +2,7 @@
   キャンセルが完了しました
 </div>
 <div>
-  <%= "付与されたペナルティポイントは#{}点です" %>
+  <%= "付与されたペナルティポイントは#{@penalty_point_log.increase_decrease_value}点です" %>
 </div>
 <div>
   <%= link_to "トップページへ戻る", root_path %>
