@@ -74,7 +74,7 @@ class AgreementsController < ApplicationController
     event_date = Time.new(event_day.year, event_day.month, event_day.day, event_time.hour, event_time.min, event_time.sec)
     # キャンセル時間とイベント開始時間を計算し、残り時間を算出（時で算出）
     time_left = event_date - cancel_time
-    unless time_left = 0
+    unless time_left == 0
       time_left = time_left/3600
     end
     @penalty_point_log = PenaltyPointLog.new

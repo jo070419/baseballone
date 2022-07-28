@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'recruitments#index'
   get 'pages/show'
   get 'pages/penalty_point_explanation'
+  get 'pages/user_lock'
   resources :recruitments, except: [:index] do
     resources :applies, only: [:new, :create]
   end
