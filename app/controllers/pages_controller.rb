@@ -16,7 +16,9 @@ class PagesController < ApplicationController
     # 小数点以下切り捨て
     days_to_resume.floor
     # 再開までの日数算出
-    days_to_resume = days_to_resume / 86400
+    unless days_to_resume == 0
+      days_to_resume = days_to_resume / 86400
+    end
     # 小数点以下を切り捨て、インスタンス変数に代入
     @days_to_resume = days_to_resume.floor
   end
