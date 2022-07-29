@@ -46,7 +46,7 @@
     </div>
   <% end %>
   <div>
-    <%= link_to "評価する", "#" %>
+    <%= link_to "評価する", new_agreement_evaluation_path(@agreement.id) %>
   </div>
   <div>
     <%= link_to "合意をキャンセルする", cancel_confirmation_agreement_path(@agreement.id) %>

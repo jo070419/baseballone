@@ -4,5 +4,7 @@ class UsersController < ApplicationController
     if @user.nil?
       redirect_to root_path
     end
+    @evaluation = Evaluation.find_by(user_id: @user.id)
+    @penalty_point = PenaltyPoint.find_by(user_id: @user.id)
   end
 end

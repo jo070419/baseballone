@@ -35,6 +35,11 @@ Rails.application.routes.draw do
       get 'cancel_confirmation'
       get 'cancel_complete'
     end
+    resources :evaluations, only: [:new, :create] do
+      collection do
+        get 'absence_without_notice'
+      end
+    end
   end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -3,17 +3,13 @@
   <%= @user.nickname %>
 </div>
 <div>
-  <%# 評価機能実装時に実装 %>
   評価：
-  良
-  普
-  悪
-  <%# 評価機能実装時に実装 %>
+  良<%= @evaluation.good %>
+  普<%= @evaluation.usually %>
+  悪<%= @evaluation.bad %>
 </div>
 <div>
-  <%# ペナルティポイント機能実装時に実装 %>
-  ペナルティポイント：
-  <%# ペナルティポイント機能実装時に実装 %>
+  ペナルティポイント：<%= @penalty_point.point %>
 </div>
 <% if @user == current_user %>
   <div>

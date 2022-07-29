@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    @user = User.new(penalty_point_params)
+    @user = User.new(penalty_point_evaluation_params)
     @user.build_penalty_point
     @user.save
   end
@@ -65,7 +65,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def penalty_point_params
-    params.permit(:sign_up, keys: [:nickname, :phone_number, { penalty_point_attributes: [:point] }])
+  def penalty_point_evaluation_params
+    params.permit(:sign_up, keys: [:nickname, :phone_number, { penalty_point_attributes: [:point] }, { evaluation_attributes: [:good, :usually, :bad]}])
   end
 end

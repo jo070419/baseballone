@@ -35,6 +35,12 @@
   <%= f.hidden_field :point, value: 0 %> 
   <% end %>
 
+  <%= f.fields_for :evaluation, Evaluation.new do |f| %>
+  <%= f.hidden_field :good, value: 0 %>
+  <%= f.hidden_field :usually, value: 0 %>
+  <%= f.hidden_field :bad, value: 0 %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
