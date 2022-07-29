@@ -6,5 +6,8 @@
   <%= f.label :usually, "普", {value: :usually, style: "display: inline-block;"} %>
   <%= f.radio_button :evaluation, :bad %>
   <%= f.label :bad, "悪", {value: :bad, style: "display: inline-block;"} %>
-  <%= f.submit "送信" %>
+  <%= f.submit "送信する" %>
 <% end %>
+<div>
+  <%= link_to "無断欠席", absence_without_notice_agreement_evaluations_path(@agreement.id) %>
+</div>
