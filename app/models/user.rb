@@ -12,5 +12,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_one  :penalty_point
   accepts_nested_attributes_for :penalty_point
+  has_one  :evaluation
+  accepts_nested_attributes_for :evaluation
 end
 

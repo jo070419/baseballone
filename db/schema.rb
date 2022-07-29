@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_23_132835) do
+ActiveRecord::Schema.define(version: 2022_07_28_082222) do
 
   create_table "agreements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.boolean "agreement_flag"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 2022_07_23_132835) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["message_room_id"], name: "index_entries_on_message_room_id"
     t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
+  create_table "evaluations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "good", default: 0
+    t.integer "usually", default: 0
+    t.integer "bad", default: 0
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_evaluations_on_user_id"
   end
 
   create_table "message_rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -133,6 +143,7 @@ ActiveRecord::Schema.define(version: 2022_07_23_132835) do
   add_foreign_key "applies", "users"
   add_foreign_key "entries", "message_rooms"
   add_foreign_key "entries", "users"
+  add_foreign_key "evaluations", "users"
   add_foreign_key "message_rooms", "applies"
   add_foreign_key "messages", "message_rooms"
   add_foreign_key "messages", "users"

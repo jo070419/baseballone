@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       get 'cancel_confirmation'
       get 'cancel_complete'
     end
+    resources :evaluations, only: [:new, :create]
   end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

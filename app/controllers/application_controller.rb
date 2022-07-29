@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   private
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :phone_number, { penalty_point_attributes: [:point] }])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :phone_number, { penalty_point_attributes: [:point] }, { evaluation_attributes: [:good, :usually, :bad]}])
   end
 
   def user_lock
