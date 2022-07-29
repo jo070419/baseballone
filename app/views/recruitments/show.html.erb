@@ -39,7 +39,7 @@
   本文
   <%= @recruitment.recruitment_text %>
 </div>
-<% if @recruitment.recruitment_deadline < Time.now %>
+<% if @recruitment.recruitment_deadline > Time.now %>
   <% if current_user == @recruitment.user %>
     <%= link_to "編集", edit_recruitment_path(@recruitment.id) %>
     <%= link_to "削除", recruitment_path(@recruitment.id), method: :delete %>
