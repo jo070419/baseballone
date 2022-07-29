@@ -39,13 +39,18 @@
   本文
   <%= @recruitment.recruitment_text %>
 </div>
-<% if current_user == @recruitment.user %>
-  <%= link_to "編集", edit_recruitment_path(@recruitment.id) %>
-  <%= link_to "削除", recruitment_path(@recruitment.id), method: :delete %>
-<% elsif @apply.nil? %>
-  <%= link_to "応募メッセージを送る", new_recruitment_apply_path(@recruitment.id) %>
+<% if @recruitment.recruitment_deadline < Time.now %>
+  <% if current_user == @recruitment.user %>
+    <%= link_to "編集", edit_recruitment_path(@recruitment.id) %>
+    <%= link_to "削除", recruitment_path(@recruitment.id), method: :delete %>
+  <% elsif @apply.nil? %>
+    <%= link_to "応募メッセージを送る", new_recruitment_apply_path(@recruitment.id) %>
+  <% else %>
+    応募済みです
+  <% end %>
 <% else %>
-  応募済みです
+  この募集は終了しました
 <% end %>
   <%= link_to 'トップへ戻る', root_path %>
 </div>
+<% @recruitment.recruitment_deadline > Time.now %>
