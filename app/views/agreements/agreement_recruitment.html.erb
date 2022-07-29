@@ -36,26 +36,28 @@
     <% applies = Apply.where(recruitment_id: recruitment.id) %>
     <% applies.each do |apply| %>
       <% agreement = Agreement.find_by(apply_id: apply.id) %>
-      <div>
-        <%= link_to agreement_path(agreement.id) do %>
-          <div>
-            応募者：
-            <%= apply.user.nickname %>
-          </div>
-            <%# recruitment_idが募集に紐づくメッセージルームを取得 %>
-            <% message_room = MessageRoom.find_by(apply_id: apply.id) %>
-            <%# メッセージルームを特定 %>
-            <% message = Message.where(message_room_id: message_room.id).last %>
-          <div>
-            <% if message.user.id == current_user.id %>
-              あなた
-            <% else %>
-              <%= message.user.nickname %>
-            <% end %>
-            <%= message.text %>
-          </div>
-        <% end %>
-      </div>
+      <% if agreement.present? %>
+        <div>
+          <%= link_to agreement_path(agreement.id) do %>
+            <div>
+              応募者：
+              <%= apply.user.nickname %>
+            </div>
+              <%# recruitment_idが募集に紐づくメッセージルームを取得 %>
+              <% message_room = MessageRoom.find_by(apply_id: apply.id) %>
+              <%# メッセージルームを特定 %>
+              <% message = Message.where(message_room_id: message_room.id).last %>
+            <div>
+              <% if message.user.id == current_user.id %>
+                あなた
+              <% else %>
+                <%= message.user.nickname %>
+              <% end %>
+              <%= message.text %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
