@@ -1,45 +1,65 @@
 応募詳細ページ
-<div>
-  <%= @apply.recruitment.title %>
-</div>
-<div>
-  <%= link_to @apply.recruitment.user.nickname, user_path(@apply.recruitment.user.id) %>
-</div>
-<div>
-  開催日時：
-  <%= @apply.recruitment.event_date %>
-  <%= @apply.recruitment.start_time.name %>
-  -
-  <%= @apply.recruitment.end_time.name %>
-</div>
-<div>
-  場所：
-  <%= @apply.recruitment.prefecture.name %>
-  >
-  <%= @apply.recruitment.ball_park %>
-</div>
-<div>
-  募集の種類：
-  <%= @apply.recruitment.category.category_name %>
-</div>
-<div>
-  レベル：
-  <%= @apply.recruitment.level.name %>
-</div>
-<%= form_with model: @message, url: apply_show_message_apply_messages_path(@apply.id), local: true do |f| %>
-  <%= f.text_area :text, placeholder: "500字以内" %>
-  <%= f.submit "応募メッセージを送信する" %>
-<% end %>
-<% @messages.each do |message| %>
-  <div>
-    <% if message.user.id == current_user.id %>
-      あなた
-    <% else %>
-      <%= message.user.nickname %>
+<div class="content">
+  <div class="recruitment_list_agreement">
+    <div class="title">
+      <%= @apply.recruitment.title %>
+    </div>
+    <div class="user_name">
+      <%= link_to user_path(@apply.recruitment.user.id) do %>
+        <%= @apply.recruitment.user.nickname %>
+      <% end %>
+    </div>
+    <div class="recruitment_text">
+      開催日時：
+      <%= @apply.recruitment.event_date %>
+      <%= @apply.recruitment.start_time.name %>
+      -
+      <%= @apply.recruitment.end_time.name %>
+    </div>
+    <div class="recruitment_text">
+      場所：
+      <%= @apply.recruitment.prefecture.name %>
+      >
+      <%= @apply.recruitment.ball_park %>
+    </div>
+    <div class="recruitment_text">
+      募集の種類：
+      <%= @apply.recruitment.category.category_name %>
+    </div>
+    <div class="recruitment_text">
+      レベル：
+      <%= @apply.recruitment.level.name %>
+    </div>
+  </div>
+  <div class="message_field">
+    <%= form_with model: @message, url: apply_show_message_apply_messages_path(@apply.id), local: true do |f| %>
+      <%= f.text_area :text, placeholder: "500字以内", class: :form_field %>
+      <div id="evaluation_post">
+        <%= f.submit "応募メッセージを送信する", class: :form__btn %>
+      </div>
     <% end %>
   </div>
-  <div>
-    <%= message.text %>
+  <div class="message_area">
+    <% @messages.each do |message| %>
+      <div class="message">
+        <div>
+          <% if message.user.id == current_user.id %>
+          <div class="user_name">
+            あなた
+          </div>
+          <% else %>
+          <div class="user_name">
+            <%= message.user.nickname %>
+          </div>
+          <% end %>
+        </div>
+        <div>
+          <%= message.text %>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
-<%= link_to "戻る", applies_path %>
+  <div class="agreement_btn_parents">
+    <%= link_to "戻る", applies_path, class: :form__btn %>
+  </div>
+</div>

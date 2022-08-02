@@ -1,56 +1,68 @@
-<div>
-  タイトル
-  <%= @recruitment.title %>
+<div class="apply_show">
+  <div>
+    <table>
+      <tr>
+        <th>タイトル</th>
+        <td><%= @recruitment.title %></td>
+      </tr>
+      <tr>
+        <th>募集者</th>
+        <td><%= link_to "#{@recruitment.user.nickname}", user_path(@recruitment.user.id), class: :apply_show_user%></td>
+      </tr>
+      <tr>
+        <th>募集カテゴリ</th>
+        <td><%= @recruitment.category.category_name %></td>
+      </tr>
+      <tr>
+        <th>レベル</th>
+        <td><%= @recruitment.level.name %></td>
+      </tr>
+      <tr>
+        <th>開催エリア</th>
+        <td><%= @recruitment.prefecture.name %></td>
+      </tr>
+      <tr>
+        <th>球場</th>
+        <td><%= @recruitment.ball_park %></td>
+      </tr>
+      <tr>
+        <th>開催日</th>
+        <td>
+        <%= @recruitment.event_date %>
+        <%= @recruitment.start_time.name %>
+            -
+        <%= @recruitment.end_time.name %>
+        <td>
+      </tr>
+      <tr>
+        <th>募集期限</th>
+        <td><%= @recruitment.recruitment_deadline %></td>
+      </tr>
+      <tr>
+        <th>本文</th>
+        <td><%= @recruitment.recruitment_text %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="apply_show_form_btn_area">
+    <% if @recruitment.recruitment_deadline > Time.now %>
+      <% if current_user == @recruitment.user %>
+      <div class="apply_show_form_btn">
+        <%= link_to "編集", edit_recruitment_path(@recruitment.id), class: :form__btn %>
+      </div>
+      <div class="apply_show_form_btn">
+        <%= link_to "削除", recruitment_path(@recruitment.id), method: :delete, class: :form__btn %>
+      </div>
+      <% elsif @apply.nil? %>
+        <%= link_to "応募メッセージを送る", new_recruitment_apply_path(@recruitment.id), class: :form__btn %>
+      <% else %>
+        応募済みです
+      <% end %>
+    <% else %>
+      この募集は終了しました
+    <% end %>
+    <div class="apply_show_form_btn">
+      <%= link_to 'トップへ戻る', root_path, class: :form__btn %>
+    </div>
+  </div>
 </div>
-<div>
-  <%# 募集者追加、（マージ時コメントアウト消す） %>
-  募集者
-  <%= link_to user_path(@recruitment.user.id) do %>
-    <%= @recruitment.user.nickname %>
-  <% end %>
-<div>
-  募集カテゴリ
-  <%= @recruitment.category.category_name %>
-</div>
-<div>
-  レベル
-  <%= @recruitment.level.name %>
-</div>
-<div>
-  開催エリア
-  <%= @recruitment.prefecture.name %>
-</div>
-<div>
-  球場
-  <%= @recruitment.ball_park %>
-</div>
-<div>
-  開催日
-  <%= @recruitment.event_date %>
-  <%= @recruitment.start_time.name %>
-      -
-  <%= @recruitment.end_time.name %>
-</div>
-<div>
-  募集期限
-  <%= @recruitment.recruitment_deadline %>
-</div>
-<div>
-  本文
-  <%= @recruitment.recruitment_text %>
-</div>
-<% if @recruitment.recruitment_deadline > Time.now %>
-  <% if current_user == @recruitment.user %>
-    <%= link_to "編集", edit_recruitment_path(@recruitment.id) %>
-    <%= link_to "削除", recruitment_path(@recruitment.id), method: :delete %>
-  <% elsif @apply.nil? %>
-    <%= link_to "応募メッセージを送る", new_recruitment_apply_path(@recruitment.id) %>
-  <% else %>
-    応募済みです
-  <% end %>
-<% else %>
-  この募集は終了しました
-<% end %>
-  <%= link_to 'トップへ戻る', root_path %>
-</div>
-<% @recruitment.recruitment_deadline > Time.now %>

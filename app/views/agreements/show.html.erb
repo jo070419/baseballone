@@ -1,59 +1,85 @@
 合意後詳細ページ
-<div>
-  <%= @agreement.recruitment.title %>
-</div>
-<div>
-  <%= link_to user_path(@agreement.recruitment.user.id) do %>
-    <%= @agreement.recruitment.user.nickname %>
-  <% end %>
-</div>
-<div>
-  開催日時：
-  <%= @agreement.recruitment.event_date %>
-  <%= @agreement.recruitment.start_time.name %>
-  -
-  <%= @agreement.recruitment.end_time.name %>
-</div>
-<div>
-  場所：
-  <%= @agreement.recruitment.prefecture.name %>
-  >
-  <%= @agreement.recruitment.ball_park %>
-</div>
-<div>
-  募集の種類：
-  <%= @agreement.recruitment.category.category_name %>
-</div>
-<div>
-  レベル：
-  <%= @agreement.recruitment.level.name %>
-</div>
-<% if @agreement.cancel_flag == false %>
-  <%= form_with model: @message, url: after_agreement_message_apply_messages_path(@agreement.apply_id), local: true do |f| %>
-    <%= f.text_area :text, placeholder: "500字以内" %>
-    <%= f.submit "応募メッセージを送信する" %>
-  <% end %>
-  <% @messages.each do |message| %>
+<div class="content">
+  <div class="recruitment_list_agreement">
+    <div class="title">
+      <%= @agreement.recruitment.title %>
+    </div>
     <div>
-      <% if message.user.id == current_user.id %>
-        あなた
-      <% else %>
-        <%= message.user.nickname %>
+      <%= link_to user_path(@agreement.recruitment.user.id) do %>
+        <%= @agreement.recruitment.user.nickname %>
       <% end %>
     </div>
-    <div>
-      <%= message.text %>
+    <div class="recruitment_text">
+      開催日時：
+      <%= @agreement.recruitment.event_date %>
+      <%= @agreement.recruitment.start_time.name %>
+      -
+      <%= @agreement.recruitment.end_time.name %>
     </div>
-  <% end %>
-  <div>
-    <%= link_to "評価する", new_agreement_evaluation_path(@agreement.id) %>
+    <div class="recruitment_text">
+      場所：
+      <%= @agreement.recruitment.prefecture.name %>
+      >
+      <%= @agreement.recruitment.ball_park %>
+    </div>
+    <div class="recruitment_text">
+      募集の種類：
+      <%= @agreement.recruitment.category.category_name %>
+    </div>
+    <div class="recruitment_text">
+      レベル：
+      <%= @agreement.recruitment.level.name %>
+    </div>
   </div>
   <div>
-    <%= link_to "合意をキャンセルする", cancel_confirmation_agreement_path(@agreement.id) %>
+    <% if @agreement.cancel_flag == false %>
+    <div class="message_field">
+      <%= form_with model: @message, url: after_agreement_message_apply_messages_path(@agreement.apply_id), local: true do |f| %>
+        <%= f.text_area :text, placeholder: "500字以内", class: :form_field %>
+        <div id="evaluation_post">
+          <%= f.submit "メッセージを送信する", class: :form__btn %>
+        </div>
+      </div>
+      <% end %>
+      <div class="message_area">
+        <% @messages.each do |message| %>
+          <div class="message">
+            <div>
+              <% if message.user.id == current_user.id %>
+                <div class="user_name">
+                  あなた
+                </div>
+              <% else %>
+                <div class="user_name">
+                  <%= message.user.nickname %>
+                </div>
+              <% end %>
+            </div>
+            <div>
+              <%= message.text %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="agreement_btn_parents">
+        <div class="agreement_btn">
+          <%= link_to "評価する", new_agreement_evaluation_path(@agreement.id), class: :form__btn %>
+        </div>
+        <div class="agreement_btn">
+          <%= link_to "合意をキャンセルする", cancel_confirmation_agreement_path(@agreement.id), class: :form__btn %>
+        </div>
+        <div>
+          <%= link_to "戻る", agreement_recruitment_agreements_path, class: :form__btn %>
+        </div>
+      </div>
+    <% else %>
+      <div class="agreement_btn_parents">
+        この合意はキャンセルされました
+        <div>
+          <%= link_to "戻る", agreement_recruitment_agreements_path, class: :form__btn %>
+        </div>
+      </div>
+    <% end %>
+    </div>
   </div>
-<% else %>
-  この合意はキャンセルされました
-<% end %>
-<div>
-  <%= link_to "戻る", agreement_recruitment_agreements_path %>
 </div>

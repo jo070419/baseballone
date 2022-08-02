@@ -1,16 +1,22 @@
-評価ページ
-<%= form_with url: agreement_evaluations_path(@agreement.id), local: true do |f| %>
-  <%= f.radio_button :evaluation, :good %>
-  <%= f.label :good, "良", {value: :good, style: "display: inline-block;"} %>
-  <%= f.radio_button :evaluation, :usually %>
-  <%= f.label :usually, "普", {value: :usually, style: "display: inline-block;"} %>
-  <%= f.radio_button :evaluation, :bad %>
-  <%= f.label :bad, "悪", {value: :bad, style: "display: inline-block;"} %>
-  <%= f.submit "送信する" %>
-<% end %>
-<div>
-  <%= link_to "無断欠席", absence_without_notice_agreement_evaluations_path(@agreement.id) %>
-</div>
-<div>
-  <%= link_to "戻る", :back %>
+<div class="evaluation_content">
+  <div class="evaluation_area">
+    評価ページ
+    <%= form_with url: agreement_evaluations_path(@agreement.id), local: true do |f| %>
+      <%= f.radio_button :evaluation, :good %>
+      <%= f.label :good, "良", {value: :good, style: "display: inline-block;"} %>
+      <%= f.radio_button :evaluation, :usually %>
+      <%= f.label :usually, "普", {value: :usually, style: "display: inline-block;"} %>
+      <%= f.radio_button :evaluation, :bad %>
+      <%= f.label :bad, "悪", {value: :bad, style: "display: inline-block;"} %>
+      <div id="evaluation_post">
+        <%= f.submit "送信する", class: :form__btn %>
+      </div>
+    <% end %>
+    <div>
+      <%= link_to "戻る", :back, class: :form__btn %>
+    </div>
+  </div>
+  <div>
+    <%= link_to "無断欠席の場合はこちら", absence_without_notice_agreement_evaluations_path(@agreement.id), id: :absence_without_notice_btn %>
+  </div>
 </div>

@@ -1,33 +1,39 @@
 応募一覧ページ
-<% @applies.each do |apply| %>
+<div class="content">
+  <% @applies.each do |apply| %>
+    <div class="recruitment_list_agreement">
+      <%= link_to apply_path(apply.id) do %>
+        <div class="title">
+          <%= apply.recruitment.title %>
+        </div>
+        <div>
+          <%= link_to apply.recruitment.user.nickname, user_path(apply.recruitment.user.id) %>
+        </div>
+        <div class="recruitment_text">
+          開催日時：
+          <%= apply.recruitment.event_date %>
+          <%= apply.recruitment.start_time.name %>
+          -
+          <%= apply.recruitment.end_time.name %>
+        </div>
+        <div class="recruitment_text">
+          場所：
+          <%= apply.recruitment.prefecture.name %>
+          >
+          <%= apply.recruitment.ball_park %>
+        </div>
+        <div class="recruitment_text">
+          募集の種類：
+          <%= apply.recruitment.category.category_name %>
+        </div>
+        <div class="recruitment_text">
+          レベル：
+          <%= apply.recruitment.level.name %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
   <div>
-    <%= link_to apply.recruitment.title, apply_path(apply.id) %>
+    <%= link_to "戻る", user_path(current_user.id), class: :form__btn %>
   </div>
-  <div>
-    <%= link_to apply.recruitment.user.nickname, user_path(apply.recruitment.user.id) %>
-  </div>
-  <div>
-    開催日時：
-    <%= apply.recruitment.event_date %>
-    <%= apply.recruitment.start_time.name %>
-    -
-    <%= apply.recruitment.end_time.name %>
-  </div>
-  <div>
-    場所：
-    <%= apply.recruitment.prefecture.name %>
-    >
-    <%= apply.recruitment.ball_park %>
-  </div>
-  <div>
-    募集の種類：
-    <%= apply.recruitment.category.category_name %>
-  </div>
-  <div>
-    レベル：
-    <%= apply.recruitment.level.name %>
-  </div>
-<% end %>
-<div>
-  <%= link_to "戻る", user_path(current_user.id) %>
 </div>
