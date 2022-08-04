@@ -100,6 +100,15 @@ a {
   transition: 0.4s ease;
 }
 
+.nav__btn_hamburger{
+  display: inline-block;
+  padding: 0.4em 1.6em;
+  font-size: 10px;
+  color: #87CEFA;
+  text-decoration: none;
+  user-select: none;
+}
+
 /* スマホ表示時、ヘッダーメニュー消す */
 @media (max-width: 768px) {
   .nav__right {
