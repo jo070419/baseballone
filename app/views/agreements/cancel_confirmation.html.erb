@@ -48,7 +48,7 @@
       <div class="agreement_btn">
         <%= link_to "ペナルティポイントについてはこちら", pages_penalty_point_explanation_path, class: :form__btn %>
       </div>
-      <% if @agreement.cancel_flag == false %>
+      <% if !@agreement.cancel_flag %>
       <div class="agreement_btn">
         <%= link_to "キャンセルする", cancel_complete_agreement_path(@agreement.id), class: :form__btn %>
       </div>
