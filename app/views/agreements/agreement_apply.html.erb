@@ -1,60 +1,63 @@
 合意した応募
-<% @applies.each do |apply| %>
-  <% recruitment = Recruitment.find(apply.recruitment.id) %>
-  <% agreement = Agreement.find_by(apply_id: apply.id, agreement_flag: 1) %>
-  <% if agreement.present? %>
-    <div>
-      <%= link_to recruitment_path(apply.recruitment.id) do %>
-        <%= agreement.recruitment.title %>
-      <% end %>
-    </div>
-    <div>
-      <%= link_to user_path(agreement.recruitment.user.id) do %>
-        <%= agreement.recruitment.user.nickname %>
-      <% end %>
-    </div>
-    <div>
-      開催日時：
-      <%= agreement.recruitment.event_date %>
-      <%= agreement.recruitment.start_time.name %>
-      -
-      <%= agreement.recruitment.end_time.name %>
-    </div>
-    <div>
-      場所：
-      <%= agreement.recruitment.prefecture.name %>
-      >
-      <%= agreement.recruitment.ball_park %>
-    </div>
-    <div>
-      募集の種類：
-      <%= agreement.recruitment.category.category_name %>
-    </div>
-    <div>
-      レベル：
-      <%= agreement.recruitment.level.name %>
-    </div>
-    <div>
-      <%# メッセージ機能で実装 %>
-        <% message_room = MessageRoom.find_by(apply_id: apply.id) %>
-        <% message = Message.where(message_room_id: message_room.id).last %>
-        <%= link_to agreement_path(agreement.id) do %>
-          <div>
-            送信者：
-            <%= message.user.nickname %>
-          </div>
-          <div>
-            <%= message.text %>
-          </div>
+<div class="content">
+  <% @applies.each do |apply| %>
+    <% recruitment = Recruitment.find(apply.recruitment.id) %>
+    <% agreement = Agreement.find_by(apply_id: apply.id, agreement_flag: 1) %>
+    <% if agreement.present? %>
+    <div class="recruitment_list_agreement">
+      <div class="title">
+        <%= link_to recruitment_path(apply.recruitment.id) do %>
+          <%= agreement.recruitment.title %>
         <% end %>
-      <%# メッセージ機能で実装 %>
+      </div>
+      <div class="recruitment_text">
+        <%= link_to user_path(agreement.recruitment.user.id) do %>
+          <%= agreement.recruitment.user.nickname %>
+        <% end %>
+      </div>
+      <div class="recruitment_text">
+        開催日時：
+        <%= agreement.recruitment.event_date %>
+        <%= agreement.recruitment.start_time.name %>
+        -
+        <%= agreement.recruitment.end_time.name %>
+      </div>
+      <div class="recruitment_text">
+        場所：
+        <%= agreement.recruitment.prefecture.name %>
+        >
+        <%= agreement.recruitment.ball_park %>
+      </div>
+      <div class="recruitment_text">
+        募集の種類：
+        <%= agreement.recruitment.category.category_name %>
+      </div>
+      <div class="recruitment_text">
+        レベル：
+        <%= agreement.recruitment.level.name %>
+      </div>
     </div>
-  <% else %>
-    <div>
-      合意した応募はありません
-    </div>
+      <div>
+        <%# メッセージ機能で実装 %>
+          <% message_room = MessageRoom.find_by(apply_id: apply.id) %>
+          <% message = Message.where(message_room_id: message_room.id).last %>
+          <div class="apply_message">
+            <%= link_to agreement_path(agreement.id) do %>
+              <div class="message_text">
+                <% if message.user.id == current_user.id %>
+                  あなた
+                <% else %>
+                  <%= message.user.nickname %>
+                <% end %>
+                <%= message.text %>
+              </div>
+            <% end %>
+          </div>
+        <%# メッセージ機能で実装 %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
-<div>
-  <%= link_to "戻る", user_path(current_user.id) %>
+  <div>
+    <%= link_to "戻る", user_path(current_user.id), class: :form__btn %>
+  </div>
 </div>

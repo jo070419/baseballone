@@ -1,50 +1,61 @@
 合意後キャンセルページ
-<div>
-  <%= @agreement.recruitment.title %>
-</div>
-<div>
-  <%= link_to user_path(@agreement.recruitment.user.id) do %>
-    <%= @agreement.recruitment.user.nickname %>
-  <% end %>
-</div>
-<div>
-  開催日時：
-  <%= @agreement.recruitment.event_date %>
-  <%= @agreement.recruitment.start_time.name %>
-  -
-  <%= @agreement.recruitment.end_time.name %>
-</div>
-<div>
-  場所：
-  <%= @agreement.recruitment.prefecture.name %>
-  >
-  <%= @agreement.recruitment.ball_park %>
-</div>
-<div>
-  募集の種類：
-  <%= @agreement.recruitment.category.category_name %>
-</div>
-<div>
-  レベル：
-  <%= @agreement.recruitment.level.name %>
-</div>
-<div>
-  応募者：
-  <%= @agreement.user.nickname %>
-<div>
-  キャンセルしますか？
-</div>
-<div>
-  ※開催までの時間によってペナルティポイントが付与されます
-</div>
-<div>
-  <%= link_to "ペナルティポイントについてはこちら", pages_penalty_point_explanation_path %>
-</div>
-<% if @agreement.cancel_flag == false %>
-  <div>
-    <%= link_to "キャンセルする", cancel_complete_agreement_path(@agreement.id) %>
+<div class="content">
+  <div class="recruitment_list_agreement">
+    <div class="title">
+      <%= @agreement.recruitment.title %>
+    </div>
+    <div class="user_name">
+      <%= link_to user_path(@agreement.recruitment.user.id) do %>
+        <%= @agreement.recruitment.user.nickname %>
+      <% end %>
+    </div>
+    <div class="recruitment_text">
+      開催日時：
+      <%= @agreement.recruitment.event_date %>
+      <%= @agreement.recruitment.start_time.name %>
+      -
+      <%= @agreement.recruitment.end_time.name %>
+    </div>
+    <div class="recruitment_text">
+      場所：
+      <%= @agreement.recruitment.prefecture.name %>
+      >
+      <%= @agreement.recruitment.ball_park %>
+    </div>
+    <div class="recruitment_text">
+      募集の種類：
+      <%= @agreement.recruitment.category.category_name %>
+    </div>
+    <div class="recruitment_text">
+      レベル：
+      <%= @agreement.recruitment.level.name %>
+    </div>
+    <div class="recruitment_text">
+      応募者：
+      <%= @agreement.user.nickname %>
+    </div>
   </div>
-<% end %>
-<div>
-  <%= link_to "戻る", agreement_path(@agreement.id) %>
+  <div>
+    <div class="cancel_area">
+      <div>
+        <span class="cancel">キャンセルしますか？</span>
+      </div>
+      <div>
+        ※開催までの時間によってペナルティポイントが付与されます
+      </div>
+    </div>
+    <div class="agreement_btn_parents">
+      <div class="agreement_btn">
+        <%= link_to "ペナルティポイントについてはこちら", pages_penalty_point_explanation_path, class: :form__btn %>
+      </div>
+      <% if !@agreement.cancel_flag %>
+      <div class="agreement_btn">
+        <%= link_to "キャンセルする", cancel_complete_agreement_path(@agreement.id), class: :form__btn %>
+      </div>
+      <% end %>
+      <div>
+        <%= link_to "戻る", agreement_path(@agreement.id), class: :form__btn %>
+      </div>
+    </div>
+  </div>
 </div>

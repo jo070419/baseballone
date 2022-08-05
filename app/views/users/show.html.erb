@@ -1,29 +1,35 @@
-ユーザー詳細ページ
-<div>
-  <%= @user.nickname %>
-</div>
-<div>
-  評価：
-  良<%= @evaluation.good %>
-  普<%= @evaluation.usually %>
-  悪<%= @evaluation.bad %>
-</div>
-<div>
-  ペナルティポイント：<%= @penalty_point.point %>
-</div>
-<% if @user == current_user %>
-  <div>
-    <%= link_to "募集管理", recruitment_managements_path %>
+<div class="main_content">
+  <div class="sign_up">
+    <div>
+      <span class="user_show_name"><%= @user.nickname %></span>
+    </div>
+    <div>
+      評価：
+      良<%= @evaluation.good %>
+      普<%= @evaluation.usually %>
+      悪<%= @evaluation.bad %>
+    </div>
+    <div>
+      ペナルティポイント：<%= @penalty_point.point %>
+    </div>
+    <div class="user_menu_area">
+      <% if @user == current_user %>
+      <div class="user_menu">
+        <%= link_to "募集管理", recruitment_managements_path, class: :menu_font %>
+      </div>
+      <div class="user_menu">
+        <%= link_to "応募管理", applies_path, class: :menu_font %>
+      </div>
+      <div class="user_menu">
+        <%= link_to "合意した募集", agreement_recruitment_agreements_path, class: :menu_font %>
+      </div>
+      <div class="user_menu_last">
+        <%= link_to "合意した応募", agreement_apply_agreements_path, class: :menu_font %>
+      </div>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to "トップへ戻る", root_path, class: :form__btn %>
+    </div>
   </div>
-  <div>
-    <%= link_to "応募管理", applies_path %>
-  </div>
-  <div>
-    <%= link_to "合意した募集", agreement_recruitment_agreements_path %>
-  </div>
-  <div>
-    <%= link_to "合意した応募", agreement_apply_agreements_path %>
-<% end %>
-<div>
-  <%= link_to "トップへ戻る", root_path %>
 </div>

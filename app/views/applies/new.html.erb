@@ -1,6 +1,12 @@
-応募メッセージ
-<%= form_with model: @apply_message, url: recruitment_applies_path(@recruitment.id), local: true do |f|%>
-  <%= f.text_area :text, placeholder: "500字以内" %>
-  <%= f.submit "応募メッセージを送信する" %>
-<% end %>
-<%= link_to '戻る', recruitment_path(@recruitment.id) %>
+<div class="evaluation_content">
+  <div class="evaluation_area">
+    応募メッセージ
+    <%= form_with model: @apply_message, url: recruitment_applies_path(@recruitment.id), local: true do |f|%>
+      <%= f.text_area :text, placeholder: "500字以内", class: :form_field%>
+      <div id="evaluation_post">
+        <%= f.submit "応募メッセージを送信する", class: :form__btn %>
+      </div>
+    <% end %>
+    <%= link_to '戻る', recruitment_path(@recruitment.id), class: :form__btn %>
+  </div>
+</div>

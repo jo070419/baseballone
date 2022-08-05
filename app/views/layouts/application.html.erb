@@ -4,27 +4,56 @@
     <title>Baseballone</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header>
-      <nav>
+    <header class="header">
+      <div class="inner">
+        <div class="nav">
+          <div class="nav__left">
+            <span class="logo_size"><%= link_to "BASEBALL ONE", root_path %></span>
+          </div>
           <% if user_signed_in? %>
-            <strong><%= link_to current_user.nickname, user_path(current_user.id) %></strong>
-            <%= link_to 'プロフィール変更', edit_user_registration_path %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+          <div class="nav__right">
+            <%= link_to current_user.nickname, user_path(current_user.id), class: :nav__logout %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: :nav__logout %>
+            <%= link_to '募集する', new_recruitment_path, class: :nav__btn %>
+          </div>
           <% else %>
-            <%= link_to 'サインアップ', new_user_registration_path %>
-            <%= link_to 'ログイン', new_user_session_path %>
+          <div class="nav__right">
+            <%= link_to 'サインアップ', new_user_registration_path, class: :nav__btn %>
+            <%= link_to 'ログイン', new_user_session_path, class: :nav__btn %>
+          </div>
           <% end %>
-      </nav>
+	        <div class="hamburger-demo-menubox">
+	        	<input id="hamburger-demo1" type="checkbox" class="input-hidden">
+	        	<label for="hamburger-demo1" class="hamburger-demo-switch hamburger-demo-switch1">
+	        		<span class="hamburger-switch-line1-before"></span>
+	        		<span class="hamburger-switch-line1"></span>
+	        		<span class="hamburger-switch-line1-after"></span>
+	        	</label>
+	        	<div class="hamburger-demo-menuwrap">
+	        		<ul class="hamburger-demo-menulist">
+              <% if user_signed_in? %>
+	        			<li><%= link_to current_user.nickname, user_path(current_user.id), class: :nav__logout %></li>
+	        			<li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: :nav__logout %></li>
+                <li><%= link_to '募集する', new_recruitment_path, class: :nav__btn_hamburger %></li>
+              <% else %>
+                <li><%= link_to 'サインアップ', new_user_registration_path, class: :nav__btn_hamburger %></li>
+                <li><%= link_to 'ログイン', new_user_session_path, class: :nav__btn_hamburger %></li>
+              <% end %>
+	        		</ul>
+	        	</div>
+	        	<div class="hamburger-demo-cover"></div>
+	        </div>
+        </div>
+      </div>
     </header>
 
     <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
     <%= yield %>
   </body>
