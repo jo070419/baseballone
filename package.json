@@ -1,5 +1,5 @@
 {
-  "name": "baseballone",
+  "name": "baseball-one",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0-alpha",
