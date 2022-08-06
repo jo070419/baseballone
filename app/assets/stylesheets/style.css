@@ -303,7 +303,7 @@ a {
   flex-direction: column;
   align-items: center;
   border: solid 1px #DDD;
-  box-shadow: 4px 4px 0 rgb(0, 0, 0, 0.12);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.12);
   padding: 10px;
 }
 
@@ -353,7 +353,7 @@ a {
   flex-direction: column;
   align-items: center;
   border: solid 1px #DDD;
-  box-shadow: 4px 4px 0 rgb(0, 0, 0, 0.12);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.12);
   padding: 10px;
 }
 
@@ -364,7 +364,7 @@ a {
     flex-direction: column;
     align-items: center;
     border: solid 1px #DDD;
-    box-shadow: 4px 4px 0 rgb(0, 0, 0, 0.12);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.12);
     padding: 10px;
   }
 }
@@ -475,7 +475,7 @@ table textarea{
   flex-direction: column;
   align-items: center;
   border: solid 1px #DDD;
-  box-shadow: 4px 4px 0 rgb(0, 0, 0, 0.12);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.12);
   padding: 10px;
 }
 
@@ -514,7 +514,7 @@ table textarea{
   flex-direction: column;
   align-items: center;
   border: solid 1px #DDD;
-  box-shadow: 4px 4px 0 rgb(0, 0, 0, 0.12);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.12);
   padding: 10px;
   margin-bottom: 20px;
 }
@@ -526,7 +526,7 @@ table textarea{
     flex-direction: column;
     align-items: center;
     border: solid 1px #DDD;
-    box-shadow: 4px 4px 0 rgb(0, 0, 0, 0.12);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.12);
     padding: 10px;
     margin-bottom: 20px;
   }
