@@ -212,7 +212,7 @@ a {
     top: 0;
     left: 0;
     z-index: 9997;
-    background: rgba(3,3,3,.5);
+    background: rgba(3,3,3,0.5);
     display: block;
   }
 }
