@@ -9,7 +9,7 @@ a {
   background-color: #f1f8fe;
   margin-bottom: 48px;
   padding: 20px 0;
-
+  box-shadow: 0 3px 6px rgb(0 0 0 / 18%);
 }
 .inner {
   width: 1024px;
@@ -26,8 +26,9 @@ a {
 .nav__btn{
   display: inline-block;
   padding: 0.4em 1.6em;
-  font-size: 0.8em;
-  color: #87CEFA;
+  font-size: 15px;
+  font-weight: bold;
+  color: #4f96f6;
   text-decoration: none;
   user-select: none;
   border: 1px #87CEFA solid;
@@ -43,8 +44,9 @@ a {
 .nav__logout{
   display: inline-block;
   padding: 0.4em 1.6em;
-  font-size: 0.8em;
-  color: #87CEFA;
+  font-size: 15px;
+  font-weight: bold;
+  color: #4f96f6;
   text-decoration: none;
   user-select: none;
 }
