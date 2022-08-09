@@ -9,7 +9,7 @@ a {
   background-color: #f1f8fe;
   margin-bottom: 48px;
   padding: 20px 0;
-  box-shadow: 0 3px 6px rgb(0 0 0 / 18%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
 }
 .inner {
   width: 1024px;
@@ -284,7 +284,7 @@ a {
 .recruitment_list{
   width: 30%;
   margin-top: 9px;
-  box-shadow: 0 0 8px rgb(0 0 0 / 16%);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.12);
   transition: .3s;
 }
 
