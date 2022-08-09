@@ -237,6 +237,7 @@ a {
   align-items: center;
 }
 
+
 .title {
   font-size: 20px;
   display: block;
@@ -282,7 +283,13 @@ a {
 
 .recruitment_list{
   width: 30%;
-  border-bottom: solid 1px #DDD;
+  margin-top: 9px;
+  box-shadow: 0 0 8px rgb(0 0 0 / 16%);
+  transition: .3s;
+}
+
+.recruitment_list:hover{
+  transform: translateY(-4px);
 }
 
 @media (max-width: 768px){
