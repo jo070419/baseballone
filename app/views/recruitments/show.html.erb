@@ -50,9 +50,16 @@
       <div class="apply_show_form_btn">
         <%= link_to "編集", edit_recruitment_path(@recruitment.id), class: :form__btn %>
       </div>
-      <div class="apply_show_form_btn">
-        <%= link_to "削除", recruitment_path(@recruitment.id), method: :delete, class: :form__btn %>
+      <div id="open" class="apply_show_form_btn">
+        <span class="form__btn">削除</span>
       </div>
+      <div id="mask" class="hidden"></div>
+      <section id="modal" class="hidden">
+        <p>削除しますか？</p>
+        <div id="close">
+          <%= link_to "削除", recruitment_path(@recruitment.id), method: :delete, class: :form__btn %>
+        </div>
+      </section>
       <% elsif @apply.nil? %>
         <%= link_to "応募メッセージを送る", new_recruitment_apply_path(@recruitment.id), class: :form__btn %>
       <% else %>
