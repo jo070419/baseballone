@@ -1,0 +1,15 @@
+ja:
+  activemodel:
+    attributes:
+      recruitment_category:
+        title: タイトル
+        category_name: 募集カテゴリ
+        level_id: レベル
+        capacity_id: 定員
+        prefecture_id: 開催エリア
+        ball_park: 球場
+        event_date: 開催日
+        start_time_id: 開始時間
+        end_time_id: 終了時間
+        recruitment_deadline: 募集期限
+        recruitment_text: 本文
