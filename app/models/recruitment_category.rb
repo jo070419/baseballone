@@ -9,13 +9,13 @@ class RecruitmentCategory
   with_options presence: true do
     validates :title,               length: {maximum: 100}
     validates :category_name,       inclusion: {in: ["対戦相手","助っ人"] }
-    validates :level_id,            numericality: {other_than: 0, message: "can't be blank"}
-    validates :capacity_id,         numericality: {other_than: 0, message: "can't be blank"}
-    validates :prefecture_id,       numericality: {other_than: 0, message: "can't be blank"}
+    validates :level_id,            numericality: {other_than: 1, message: "を入力してください"}
+    validates :capacity_id,         numericality: {other_than: 1, message: "を入力してください"}
+    validates :prefecture_id,       numericality: {other_than: 1, message: "を入力してください"}
     validates :ball_park,           length: {maximum: 100}
     validates :event_date
-    validates :start_time_id,       numericality: { other_than: 1, message: "can't be blank" }
-    validates :end_time_id,         numericality: { other_than: 1, message: "can't be blank" }
+    validates :start_time_id,       numericality: { other_than: 1, message: "を入力してください" }
+    validates :end_time_id,         numericality: { other_than: 1, message: "を入力してください" }
     validates :recruitment_deadline
     validates :recruitment_text,    length: {maximum: 1000}
     validates :user_id
