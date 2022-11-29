@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
     it 'password_confirmationが空の場合登録できない' do
       user.password_confirmation = ''
       user.valid?
-      expect(user.errors.full_messages).to include('パスワード（確認用）を入力してください')
+      expect(user.errors.full_messages).to include('パスワード（確認用）とパスワードの入力が一致しません')
     end
   end
   describe '文字数の検証' do
@@ -87,7 +87,7 @@ RSpec.describe User, type: :model do
         expect(user).to be_valid
       end
       it '半角英小文字、半角数字、-（ハイフン）、.（ドット）、_（アンダーバー）以外の文字がユーザー名に含まれている場合登録できない' do
-        user.email = 'tesT@gmail.com'
+        user.email = 'test?@gmail.com'
         expect(user).to be_invalid
       end
       it '指定したドメイン名の場合登録できる' do
@@ -119,7 +119,7 @@ RSpec.describe User, type: :model do
   end
   describe 'callbackの検証' do
     context 'complete_hypenの検証' do
-      fit 'ハイフンなしで値が送られた場合ハイフンを補完する' do
+      it 'ハイフンなしで値が送られた場合ハイフンを補完する' do
         no_hyphen = '09012345678'
         user.phone_number = no_hyphen
         user.valid?
