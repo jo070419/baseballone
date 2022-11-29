@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_28_082222) do
+ActiveRecord::Schema.define(version: 2022_11_22_064510) do
 
   create_table "agreements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.boolean "agreement_flag"
@@ -32,12 +32,6 @@ ActiveRecord::Schema.define(version: 2022_07_28_082222) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["recruitment_id"], name: "index_applies_on_recruitment_id"
     t.index ["user_id"], name: "index_applies_on_user_id"
-  end
-
-  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "category_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -86,7 +80,7 @@ ActiveRecord::Schema.define(version: 2022_07_28_082222) do
 
   create_table "penalty_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "point"
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_penalty_points_on_user_id"
@@ -94,6 +88,7 @@ ActiveRecord::Schema.define(version: 2022_07_28_082222) do
 
   create_table "recruitments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title", null: false
+    t.integer "category", null: false
     t.integer "level_id", null: false
     t.integer "capacity_id", null: false
     t.integer "prefecture_id", null: false
@@ -104,10 +99,8 @@ ActiveRecord::Schema.define(version: 2022_07_28_082222) do
     t.date "recruitment_deadline", null: false
     t.text "recruitment_text", null: false
     t.bigint "user_id", null: false
-    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_recruitments_on_category_id"
     t.index ["user_id"], name: "index_recruitments_on_user_id"
   end
 
@@ -148,7 +141,5 @@ ActiveRecord::Schema.define(version: 2022_07_28_082222) do
   add_foreign_key "messages", "message_rooms"
   add_foreign_key "messages", "users"
   add_foreign_key "penalty_point_logs", "penalty_points"
-  add_foreign_key "penalty_points", "users"
-  add_foreign_key "recruitments", "categories"
   add_foreign_key "recruitments", "users"
 end

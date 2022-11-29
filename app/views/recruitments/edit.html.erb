@@ -1,7 +1,7 @@
 <div class="main_content">
   <div class="recruitment">
-    <%= form_with model: @recruitment_category, url: recruitment_path(@recruitment.id), method: 'patch', local: true do |f| %>
-      <%= render 'error_messages', model: @recruitment_category %>
+    <%= form_with model: @recruitment, url: recruitment_path(@recruitment.id), method: 'patch', local: true do |f| %>
+      <%= render 'error_messages', model: @recruitment %>
       <table>
         <tr>
           <th>タイトル</th>

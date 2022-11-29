@@ -1,7 +1,7 @@
 <div class="main_content">
   <div class="recruitment">
-    <%= form_with model: @recruitment_category, url: recruitments_path, local: true do |f| %>
-      <%= render 'error_messages', model: @recruitment_category %>
+    <%= form_with model: @recruitment, url: recruitments_path, local: true do |f| %>
+      <%= render 'error_messages', model: @recruitment %>
       <table>
         <tr>
           <th>タイトル</th>
@@ -9,7 +9,7 @@
         </tr>
         <tr>
           <th>募集カテゴリ</th>
-          <td><%= f.select :category_name, [["対戦相手", "対戦相手"], ["助っ人", "助っ人"]], class: "input_form", include_blank: "選択してください" %></td>
+          <td><%= f.select :category, [["対戦相手", Recruitment::CATEGORYS[0]], ["助っ人", Recruitment::CATEGORYS[1]]], class: "event_day_input_form", include_blank: "選択してください"%></td>
         </tr>
         <tr>
           <th>レベル</th>
